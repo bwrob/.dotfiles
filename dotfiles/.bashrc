@@ -4,21 +4,23 @@
 
 # Detect Windows/Git Bash
 if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]]; then
-    if [[ -f ~/.gitbashrc ]]; then
-        source ~/.gitbashrc
-    fi
+    [[ -f ~/.gitbashrc ]] && source ~/.gitbashrc
     return
 fi
 
 # -- Linux/macOS --
 
-# Ensure common environment (including Homebrew) is available
-source ~/.sharedrc
-
-# Check if the zsh shell is available and we aren't already in zsh
-if [[ -z "$ZSH_VERSION" ]] && command -v zsh &> /dev/null; then
+# 1. Try to switch to Zsh if available
+if command -v zsh &>/dev/null; then
+    exec zsh
+elif [[ -x /opt/homebrew/bin/zsh ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+    exec zsh
+elif [[ -x /home/linuxbrew/.linuxbrew/bin/zsh ]]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     exec zsh
 fi
 
-# Fallback to Bash (if Zsh is not available)
-# (sharedrc is already sourced above)
+# 2. Fallback to Bash
+# This only runs if Zsh was not found or couldn't be executed
+[[ -f ~/.sharedrc ]] && source ~/.sharedrc
