@@ -34,7 +34,7 @@ fi
 # -- History & Shell Options --
 export HISTSIZE=1000
 if [[ -n "$ZSH_VERSION" ]]; then
-    export HISTFILE=~/.zsh_history
+    export HISTFILE=~/.histfile
     export SAVEHIST=1000
     setopt autocd
 elif [[ -n "$BASH_VERSION" ]]; then
@@ -74,11 +74,14 @@ else
 fi
 
 # -- Fastfetch --
+# Check if config exists and ensure it only runs once per session
 if [[ -z "$FASTFETCH_RUN" ]] && command -v fastfetch &>/dev/null; then
     export FASTFETCH_RUN=1
-    FASTFETCH_CONFIG="$HOME/.config/fastfetch/config.json"
-    if [[ -f "$FASTFETCH_CONFIG" ]]; then
-        fastfetch -c "$FASTFETCH_CONFIG"
+    # Check standard path, then local repo path as fallback
+    if [[ -f "$HOME/.config/fastfetch/config.json" ]]; then
+        fastfetch -c "$HOME/.config/fastfetch/config.json"
+    elif [[ -f "$HOME/.dotfiles/dotfiles/.config/fastfetch/config.json" ]]; then
+        fastfetch -c "$HOME/.dotfiles/dotfiles/.config/fastfetch/config.json"
     else
         fastfetch
     fi
