@@ -1,13 +1,13 @@
 [user]
 	name = bwrob
 	email = bartosz.marcin.wroblewski@gmail.com
-	
+
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-	
+
 [credential "https://github.com"]
     helper =
     helper = !/home/linuxbrew/.linuxbrew/bin/gh auth git-credential
@@ -16,3 +16,5 @@
     helper =
     helper = !/home/linuxbrew/.linuxbrew/bin/gh auth git-credential
 
+[push]
+	autoSetupRemote = true

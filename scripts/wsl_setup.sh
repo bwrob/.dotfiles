@@ -53,7 +53,7 @@ uv tool install poethepoet pre-commit pytest ruff basedpyright hapless 'python-l
 
 gh auth login
 
-# Install Quarto and 
+# Install Quarto and
 quarto install tinytex
 quarto install chromium
 quarto check

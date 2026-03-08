@@ -8,9 +8,11 @@ repos:
       - id: mixed-line-ending
       - id: trailing-whitespace
       - id: check-json
+        exclude: ^vscode/
       - id: check-xml
       - id: check-toml
       - id: pretty-format-json
         args: ["--autofix", "--indent=4"]
+        exclude: ^vscode/
     repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0

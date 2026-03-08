@@ -51,7 +51,7 @@ function _venv_prompt() {
 # Build the dynamic PS1
 function _set_ps1() {
     local EXIT_CODE=$?
-    
+
     # Exit Code Indicator
     local STATUS_COLOR="$C_GREEN"
     local STATUS_ICON="$ICON_STATUS_OK"
@@ -62,19 +62,19 @@ function _set_ps1() {
 
     # Top line: Session info
     local TOP_LINE="${C_GREEN}${ICON_CORNER_TOP}${ICON_ARROW}${ICON_ARROW}(${C_CYAN}${USER}${ICON_SESSION}${HOSTNAME}${C_GREEN})"
-    
+
     # Venv Segment
     TOP_LINE+="$(_venv_prompt)"
-    
+
     # Path Segment
     TOP_LINE+="${C_GREEN}-${C_RESET}[${C_WHITE}\w${C_RESET}]"
-    
+
     # Git Segment
     TOP_LINE+="$(_git_prompt)"
-    
+
     # Bottom line: Prompt symbol with status indicator
     local BOTTOM_LINE="${C_GREEN}${ICON_CORNER_BOTTOM}${ICON_ARROW}${STATUS_COLOR}${STATUS_ICON} ${C_CYAN}\$ ${C_RESET}"
-    
+
     PS1="\n${TOP_LINE}\n${BOTTOM_LINE}"
 }
 

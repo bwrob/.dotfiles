@@ -17,10 +17,10 @@ config.keys = {
   -- Split Panes using ALT + S (Vertical) and ALT + D (Horizontal)
   { key = 's', mods = 'ALT', action = wezterm.action.SplitVertical{ domain = 'CurrentPaneDomain' } },
   { key = 'd', mods = 'ALT', action = wezterm.action.SplitHorizontal{ domain = 'CurrentPaneDomain' } },
-  
+
   -- Create New Tab with ALT + T
   { key = 't', mods = 'ALT', action = wezterm.action.SpawnTab 'CurrentPaneDomain' },
-  
+
   -- Close Current Pane with ALT + W
   { key = 'w', mods = 'ALT', action = wezterm.action.CloseCurrentPane{ confirm = true } },
 }
