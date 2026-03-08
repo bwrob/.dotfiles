@@ -1,0 +1,66 @@
+# -- Git Bash Configuration --
+source ~/.sharedrc
+
+# -- Kali Theme Style Prompt (No Externals) --
+
+# Icons (Require a Nerd Font)
+ICON_SESSION="㉿"
+ICON_VENV=""
+ICON_DIR=""
+ICON_GIT=""
+ICON_ARROW="─"
+ICON_CORNER_TOP="┌"
+ICON_CORNER_BOTTOM="└"
+
+# Colors (ANSI 256 or Standard)
+C_RESET="\[\e[0m\]"
+C_BLUE="\[\e[38;5;39m\]"
+C_GREEN="\[\e[38;5;82m\]"
+C_WHITE="\[\e[38;5;255m\]"
+C_CYAN="\[\e[38;5;51m\]"
+C_YELLOW="\[\e[38;5;226m\]"
+
+# Helper: Get Git Branch and Status
+function _git_prompt() {
+    local branch
+    branch=$(git branch --show-current 2>/dev/null)
+    if [[ -n "$branch" ]]; then
+        # Kali theme style: -[branch]
+        echo -n "${C_GREEN}-${C_RESET}[${C_WHITE}${ICON_GIT} ${branch}${C_RESET}]"
+    fi
+}
+
+# Helper: Get Venv Info
+function _venv_prompt() {
+    if [[ -n "$VIRTUAL_ENV" ]]; then
+        local venv_name=$(basename "$VIRTUAL_ENV")
+        echo -n "${C_GREEN}-${C_RESET}[${C_YELLOW}${ICON_VENV} ${venv_name}${C_RESET}]"
+    fi
+}
+
+# Build the dynamic PS1
+function _set_ps1() {
+    local EXIT_CODE=$?
+    
+    # Top line: Session info
+    # ┌──(user㉿host)
+    local TOP_LINE="${C_GREEN}${ICON_CORNER_TOP}${ICON_ARROW}${ICON_ARROW}(${C_CYAN}${USER}${ICON_SESSION}${HOSTNAME}${C_GREEN})"
+    
+    # Venv Segment
+    TOP_LINE+="$(_venv_prompt)"
+    
+    # Path Segment
+    # -[path]
+    TOP_LINE+="${C_GREEN}-${C_RESET}[${C_WHITE}\w${C_RESET}]"
+    
+    # Git Segment
+    TOP_LINE+="$(_git_prompt)"
+    
+    # Bottom line: Prompt symbol
+    # └─$ 
+    local BOTTOM_LINE="${C_GREEN}${ICON_CORNER_BOTTOM}${ICON_ARROW}${C_CYAN}\$ ${C_RESET}"
+    
+    PS1="\n${TOP_LINE}\n${BOTTOM_LINE}"
+}
+
+PROMPT_COMMAND=_set_ps1

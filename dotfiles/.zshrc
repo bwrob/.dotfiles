@@ -1,68 +1,47 @@
 # -- ZSH Configuration --
-HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
-setopt autocd
 
+# -- Common Settings --
+source ~/.sharedrc
+
+# -- ZSH specific --
 autoload -Uz compinit
-compinit``
+compinit
 
-export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
-
-# --  homebrew --
-# Needs to be done before sourcing oh-my-posh and others
-if [[ $(uname) == "Darwin" ]]; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-else
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+# -- oh-my-posh (Zsh specific) --
+if command -v oh-my-posh &>/dev/null; then
+    OH_MY_POSH_THEME="kali"
+    eval "$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/$OH_MY_POSH_THEME.omp.json)"
 fi
 
-# -- rust --
-# source "$HOME/.cargo/env"
+# -- Plugins --
+# Source brew installed plugins if they exist
+AUTOSUGGESTIONS="$(brew --prefix zsh-autosuggestions 2>/dev/null)"
+[[ -n "$AUTOSUGGESTIONS" ]] && source "$AUTOSUGGESTIONS/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
-
-# -- oh-my-posh --
-OH_MY_POSH=$(brew --prefix oh-my-posh)
-OH_MY_POSH_THEME="kali"
-eval "$(oh-my-posh init zsh --config $OH_MY_POSH/themes/$OH_MY_POSH_THEME.omp.json)"
-
-# -- zsh-autosuggestions --
-AUTOSUGGESTIONS=$(brew --prefix zsh-autosuggestions)
-source "$AUTOSUGGESTIONS/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-
-# -- zsh-syntax-highlighting --
-HIGHLIGHTING=$(brew --prefix zsh-syntax-highlighting)
-source "$HIGHLIGHTING/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+HIGHLIGHTING="$(brew --prefix zsh-syntax-highlighting 2>/dev/null)"
+[[ -n "$HIGHLIGHTING" ]] && source "$HIGHLIGHTING/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 # -- fzf --
-source <(fzf --zsh)
-export FZF_CTRL_T_OPTS="--preview 'bat -n --color=always --line-range :500 {}'"
-export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
-
-# -- zoxide --
-eval "$(zoxide init zsh)"
-
-# -- Custom ZSH Aliases --
-source ~/.aliases.zsh
-
-# -- ghcup-env --
-[ -f ~/.ghcup/env ] && . ~/.ghcup/env # ghcup-env
-
-# -- Fastfetch   --
-fastfetch -c ~/.fastfetch_config.json
-
-# -- Python project executes --
-if [[ -d .venv ]]; then
-    source .venv/bin/activate
+if command -v fzf &>/dev/null; then
+    source <(fzf --zsh)
+    export FZF_CTRL_T_OPTS="--preview 'bat -n --color=always --line-range :500 {}'"
+    export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
 fi
 
-eval "$(uv generate-shell-completion zsh)"
-eval "$(uvx --generate-shell-completion zsh)"
+# -- zoxide --
+command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
+
+# -- ghcup-env --
+[[ -f ~/.ghcup/env ]] && . ~/.ghcup/env
+
+# -- Tool Completions --
+command -v uv &>/dev/null && eval "$(uv generate-shell-completion zsh)"
+command -v uvx &>/dev/null && eval "$(uvx --generate-shell-completion zsh)"
 
 fpath+=~/.zfunc; autoload -Uz compinit; compinit
-
 zstyle ':completion:*' menu select
 
-
-export HOMEBREW_NO_ENV_HINTS=1
-export EDITOR='micro'
+# -- Aliases (Apply & Config) --
+alias zsh.apply='source ~/.zshrc'
+alias zsh.config='micro ~/.zshrc'
+alias startx='sudo systemctl start lightdm'
