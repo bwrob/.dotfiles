@@ -1,0 +1,272 @@
+{
+    // --- Editor & UI ---
+    "editor.cursorSmoothCaretAnimation": "on",
+    "editor.cursorWidth": 3,
+    "editor.fontFamily": "Fira Code",
+    "editor.fontLigatures": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file",
+    "editor.inlayHints.enabled": "off",
+    "editor.inlineSuggest.edits.showCollapsed": true,
+    "editor.minimap.enabled": false,
+    "editor.minimap.renderCharacters": false,
+    "editor.mouseWheelZoom": true,
+    "editor.renderLineHighlight": "all",
+    "editor.stickyScroll.enabled": true,
+    "editor.tabSize": 4,
+    "window.commandCenter": false,
+    "window.zoomLevel": -0.5,
+    "workbench.activityBar.location": "top",
+    "workbench.colorTheme": "PyCharm Night Theme",
+    "workbench.editor.enablePreview": false,
+    "workbench.editor.tabSizing": "shrink",
+    "workbench.iconTheme": "file-icons",
+    "workbench.panel.defaultLocation": "right",
+    "workbench.preferredDarkColorTheme": "PyCharm Night Theme",
+    "workbench.settings.editor": "json",
+    "workbench.sideBar.location": "right",
+    "workbench.tree.indent": 16,
+    "workbench.tree.renderIndentGuides": "always",
+    "zenMode.fullScreen": false,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "explorer.autoReveal": true,
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "explorer.confirmPasteNative": false,
+    "explorer.sortOrder": "type",
+    "explorer.sortOrderReverse": false,
+    "explorer.fileNesting.patterns": {
+        "*.db": "${capture}.${extname}-*",
+        "*.db3": "${capture}.${extname}-*",
+        "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
+        "*.jsx": "${capture}.js",
+        "*.s3db": "${capture}.${extname}-*",
+        "*.sdb": "${capture}.${extname}-*",
+        "*.sqlite": "${capture}.${extname}-*",
+        "*.sqlite3": "${capture}.${extname}-*",
+        "*.ts": "${capture}.js",
+        "*.tsx": "${capture}.ts",
+        "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb, bun.lock",
+        "tsconfig.json": "tsconfig.*.json"
+    },
+    "files.autoSave": "onFocusChange",
+    "security.workspace.trust.untrustedFiles": "open",
+    // --- Terminal ---
+    "terminal.integrated.defaultLocation": "view",
+    "terminal.integrated.fontFamily": "MesloLGM Nerd Font",
+    "terminal.integrated.fontSize": 12,
+    "terminal.integrated.mouseWheelZoom": true,
+    "terminal.integrated.tabs.description": "",
+    "terminal.integrated.tabs.enabled": true,
+    "terminal.integrated.tabs.hideCondition": "never",
+    "terminal.integrated.tabs.location": "right",
+    "terminal.external.linuxExec": "ghostty",
+    "terminal.integrated.defaultProfile.osx": "zsh",
+    "terminal.integrated.profiles.osx": {
+        "bash": {
+            "path": "bash",
+            "args": [
+                "-l"
+            ],
+            "icon": "terminal-bash"
+        },
+        "zsh": {
+            "path": "zsh",
+            "args": [
+                "-l"
+            ]
+        },
+        "fish": {
+            "path": "fish",
+            "args": [
+                "-l"
+            ]
+        },
+        "tmux": {
+            "path": "tmux",
+            "icon": "terminal-tmux"
+        },
+        "pwsh": {
+            "path": "pwsh",
+            "icon": "terminal-powershell"
+        }
+    },
+    // --- Source Control (Git) ---
+    "git.autofetch": true,
+    "git.confirmSync": false,
+    "git.enableSmartCommit": true,
+    "githubPullRequests.pullBranch": "never",
+    // --- General Tools ---
+    "chat.instructionsFilesLocations": {
+        ".github/instructions": true,
+        ".claude/rules": true,
+        "~/.copilot/instructions": true,
+        "~/.claude/rules": true,
+    },
+    "containers.containerClient": "com.microsoft.visualstudio.containers.docker",
+    "containers.orchestratorClient": "com.microsoft.visualstudio.orchestrators.dockercompose",
+    "debug.toolBarLocation": "docked",
+    "indentRainbow.excludedLanguages": [
+        "qmd",
+        "plaintext"
+    ],
+    "indentRainbow.includedLanguages": [
+        "python"
+    ],
+    "indentRainbow.updateDelay": 100,
+    // --- Language Specific Blocks ---
+    "[python]": {
+        "editor.codeActionsOnSave": {
+            "source.fixAll": "always",
+            "source.organizeImports": "always"
+        },
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "editor.formatOnSave": true,
+        "editor.formatOnType": true,
+        "editor.rulers": [
+            88
+        ]
+    },
+    "[rust]": {
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        },
+        "editor.defaultFormatter": "rust-lang.rust-analyzer",
+        "editor.formatOnSave": true,
+        "editor.formatOnType": true,
+        "editor.rulers": [
+            80
+        ]
+    },
+    "[haskell]": {
+        "editor.defaultFormatter": "vigoo.stylish-haskell"
+    },
+    "[markdown]": {
+        "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+    },
+    "[toml]": {
+        "editor.defaultFormatter": "tamasfe.even-better-toml"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[github-actions-workflow]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "[dockercompose]": {
+        "editor.autoIndent": "advanced",
+        "editor.defaultFormatter": "redhat.vscode-yaml",
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2
+    },
+    // --- Python & Data Science Settings ---
+    "python.analysis.inlayHints.callArgumentNames": "partial",
+    "python.analysis.inlayHints.functionReturnTypes": false,
+    "python.analysis.inlayHints.variableTypes": false,
+    "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+    "python.envFile": "${workspaceFolder}/.env",
+    "python.languageServer": "Default",
+    "python.poetryPath": "poetry",
+    "python.testing.autoTestDiscoverOnSaveEnabled": true,
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    "python.testing.pytestEnabled": true,
+    "python.testing.unittestEnabled": false,
+    "basedpyright.disableLanguageServices": true,
+    "ruff.configuration": "ruff.toml",
+    "ruff.configurationPreference": "filesystemFirst",
+    "jupyter.askForKernelRestart": false,
+    "notebook.formatOnSave.enabled": true,
+    "quarto.render.renderOnSave": true,
+    "quarto.usePipQuarto": true,
+    "github.copilot.enable": {
+        "python": true,
+        "quarto": true
+    },
+    // --- C++ Settings ---
+    "C_Cpp_Runner.cCompilerPath": "clang",
+    "C_Cpp_Runner.cStandard": "",
+    "C_Cpp_Runner.compilerArgs": [],
+    "C_Cpp_Runner.cppCompilerPath": "clang++",
+    "C_Cpp_Runner.cppStandard": "",
+    "C_Cpp_Runner.debuggerPath": "lldb",
+    "C_Cpp_Runner.enableWarnings": true,
+    "C_Cpp_Runner.excludeSearch": [
+        "**/build",
+        "**/build/**",
+        "**/.*",
+        "**/.*/**",
+        "**/.vscode",
+        "**/.vscode/**"
+    ],
+    "C_Cpp_Runner.includePaths": [],
+    "C_Cpp_Runner.includeSearch": [
+        "*",
+        "**/*"
+    ],
+    "C_Cpp_Runner.linkerArgs": [],
+    "C_Cpp_Runner.msvcBatchPath": "",
+    "C_Cpp_Runner.msvcSecureNoWarnings": false,
+    "C_Cpp_Runner.msvcWarnings": [
+        "/W4",
+        "/permissive-",
+        "/w14242",
+        "/w14287",
+        "/w14296",
+        "/w14311",
+        "/w14826",
+        "/w44062",
+        "/w44242",
+        "/w14905",
+        "/w14906",
+        "/w14263",
+        "/w44265",
+        "/w14928"
+    ],
+    "C_Cpp_Runner.showCompilationTime": false,
+    "C_Cpp_Runner.useAddressSanitizer": false,
+    "C_Cpp_Runner.useLeakSanitizer": false,
+    "C_Cpp_Runner.useLinkTimeOptimization": false,
+    "C_Cpp_Runner.useMsvc": false,
+    "C_Cpp_Runner.useUndefinedSanitizer": false,
+    "C_Cpp_Runner.warnings": [
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-Wshadow",
+        "-Wformat=2",
+        "-Wcast-align",
+        "-Wconversion",
+        "-Wsign-conversion",
+        "-Wnull-dereference"
+    ],
+    "C_Cpp_Runner.warningsAsError": false,
+    // --- Haskell Settings ---
+    "haskell.formattingProvider": "stylish-haskell",
+    "haskell.manageHLS": "GHCup",
+    "stylishHaskell.commandLine": "/Users/bwrob/.cabal/bin/stylish-haskell",
+    "stylishHaskell.runOnSave": true,
+    "stylishHaskell.showConsoleOnError": true,
+    // --- Other Language Settings ---
+    "evenBetterToml.formatter.alignComments": true,
+    "evenBetterToml.formatter.alignEntries": true,
+    "evenBetterToml.formatter.allowedBlankLines": 2,
+    "evenBetterToml.formatter.arrayAutoCollapse": true,
+    "evenBetterToml.formatter.arrayAutoExpand": true,
+    "evenBetterToml.formatter.arrayTrailingComma": true,
+    "evenBetterToml.formatter.columnWidth": 88,
+    "evenBetterToml.formatter.indentEntries": true,
+    "evenBetterToml.formatter.indentTables": true,
+    "evenBetterToml.formatter.inlineTableExpand": true,
+    "evenBetterToml.formatter.reorderArrays": false,
+    "evenBetterToml.formatter.reorderInlineTables": true,
+    "evenBetterToml.formatter.reorderKeys": true,
+    "evenBetterToml.formatter.trailingNewline": true,
+    "markdown.preview.scrollEditorWithPreview": true,
+    "markdown.preview.scrollPreviewWithEditor": true
+}

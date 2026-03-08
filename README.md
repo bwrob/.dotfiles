@@ -24,19 +24,20 @@ These files are managed using the `stow` tool to ensure proper linking and organ
    cd ~/dotfiles && stow -v -R dotfiles/
    ```
 
-3. Link needed VSC config into the project repo
+3. Link VS Code configuration into your project
 
    ```bash
-   cd ~/repos && gh repo clone project && cd project_name
-   ln -Pf  ~/.vscode.python/*.json .vscode/
+   mkdir -p .vscode
+   ln -sf ~/.dotfiles/vscode/*.json .vscode/
    ```
 
 **Configuration:**
 
 * **zshrc:** The primary configuration file for Zsh. Customize it to your preferences.
 * **aliases:** A file containing custom shell aliases.
-* **vscode-settings.json:** Configuration settings for Visual Studio Code.
-* **[other-config-files]:** Additional configuration files as needed.
+* **vscode/settings.json:** Global VS Code configuration settings.
+* **vscode/extensions.json:** Recommended VS Code extensions.
+* **vscode/launch.json:** Shared VS Code debug configurations.
 
 **Updating dotfiles:**
 
