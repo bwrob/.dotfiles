@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/bin/bash
 
 # Detect OS and set VS Code User directory
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -9,7 +9,7 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     VSCODE_USER_DIR="$HOME/.config/Code/User"
 elif [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]]; then
     # Windows (Git Bash / Cygwin)
-    if [[ -n "$APPDATA" ]]; then
+    if command -v cygpath &>/dev/null && [[ -n "$APPDATA" ]]; then
         VSCODE_USER_DIR="$(cygpath "$APPDATA")/Code/User"
     else
         VSCODE_USER_DIR="$HOME/AppData/Roaming/Code/User"

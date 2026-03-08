@@ -1,9 +1,25 @@
 # -- Shared Shell Configuration (Bash/Zsh/GitBash) --
 
+# -- Helper: Path Management (Prevents Bloat) --
+path_append() {
+    if [[ ":$PATH:" != *":$1:"* ]] && [[ -d "$1" ]]; then
+        export PATH="$PATH:$1"
+    fi
+}
+path_prepend() {
+    if [[ ":$PATH:" != *":$1:"* ]] && [[ -d "$1" ]]; then
+        export PATH="$1:$PATH"
+    fi
+}
+
 # -- Homebrew Initialization --
 if [[ "$OSTYPE" == "darwin"* ]]; then
     # macOS
-    [[ -x /opt/homebrew/bin/brew ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
+    if [[ -x /opt/homebrew/bin/brew ]]; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+    elif [[ -x /usr/local/bin/brew ]]; then
+        eval "$(/usr/local/bin/brew shellenv)"
+    fi
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # Linux (Linuxbrew)
     if [[ -x /home/linuxbrew/.linuxbrew/bin/brew ]]; then
@@ -28,21 +44,36 @@ elif [[ -n "$BASH_VERSION" ]]; then
 fi
 
 # -- Path --
-export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
+path_prepend "$HOME/.local/bin"
+path_prepend "$HOME/bin"
+path_append "/usr/local/bin"
 
 # -- Environment --
 export EDITOR='micro'
 export HOMEBREW_NO_ENV_HINTS=1
 
+# -- Detect Nerd Font (for icons) --
+if [[ "$TERM_PROGRAM" == "vscode" ]] || [[ "$TERMINAL_EMULATOR" == "JetBrains-JediTerm" ]] || [[ -n "$NERD_FONT" ]]; then
+    export USE_ICONS=true
+else
+    export USE_ICONS=false
+fi
+
 # -- Common Aliases --
 alias cat='bat'
-alias dir="eza -l --group-directories-first --no-filesize --icons=always --no-time --no-user --git-ignore"
-alias dir.all="eza -l --group-directories-first --no-filesize --icons=always --no-time --no-user --git-ignore --all"
-alias dir.git="eza -l --group-directories-first --no-filesize --icons=always --no-time --no-user --git "
-alias dir.tree="eza -l --group-directories-first --no-filesize --icons=always --no-time --no-user --git-ignore --tree --level 2"
+if [[ "$USE_ICONS" == "true" ]]; then
+    alias dir="eza -l --group-directories-first --no-filesize --icons=always --no-time --no-user --git-ignore"
+    alias dir.all="eza -l --group-directories-first --no-filesize --icons=always --no-time --no-user --git-ignore --all"
+    alias dir.git="eza -l --group-directories-first --no-filesize --icons=always --no-time --no-user --git "
+    alias dir.tree="eza -l --group-directories-first --no-filesize --icons=always --no-time --no-user --git-ignore --tree --level 2"
+else
+    alias dir="eza -l --group-directories-first --no-filesize --no-time --no-user --git-ignore"
+    alias dir.all="eza -l --group-directories-first --no-filesize --no-time --no-user --git-ignore --all"
+    alias dir.git="eza -l --group-directories-first --no-filesize --no-time --no-user --git "
+    alias dir.tree="eza -l --group-directories-first --no-filesize --no-time --no-user --git-ignore --tree --level 2"
+fi
 
 # -- Fastfetch --
-# Check if config exists and ensure it only runs once per session
 if [[ -z "$FASTFETCH_RUN" ]] && command -v fastfetch &>/dev/null; then
     export FASTFETCH_RUN=1
     FASTFETCH_CONFIG="$HOME/.config/fastfetch/config.json"
@@ -53,11 +84,31 @@ if [[ -z "$FASTFETCH_RUN" ]] && command -v fastfetch &>/dev/null; then
     fi
 fi
 
-# -- Python venv auto-activation --
-if [[ -d .venv ]]; then
-    if [[ -f .venv/bin/activate ]]; then
-        source .venv/bin/activate
-    elif [[ -f .venv/Scripts/activate ]]; then
-        source .venv/Scripts/activate
+# -- Python venv auto-activation & deactivation --
+_manage_venv() {
+    # Auto-activate
+    if [[ -z "$VIRTUAL_ENV" ]]; then
+        if [[ -d .venv ]]; then
+            [[ -f .venv/bin/activate ]] && source .venv/bin/activate
+            [[ -f .venv/Scripts/activate ]] && source .venv/Scripts/activate
+        elif [[ -f .python-version ]] && command -v uv &>/dev/null; then
+            # Support uv managed venvs if .python-version exists
+            uv venv 2>/dev/null && source .venv/bin/activate 2>/dev/null
+        fi
+    # Auto-deactivate
+    elif [[ -n "$VIRTUAL_ENV" ]]; then
+        # If the current directory doesn't have the .venv that is active
+        local venv_parent=$(dirname "$VIRTUAL_ENV")
+        if [[ "$PWD" != "$venv_parent"* ]]; then
+            deactivate
+        fi
     fi
+}
+
+# Run on directory change
+if [[ -n "$ZSH_VERSION" ]]; then
+    chpwd_functions+=(_manage_venv)
+elif [[ -n "$BASH_VERSION" ]]; then
+    # For Bash, we hook into PROMPT_COMMAND
+    PROMPT_COMMAND="_manage_venv; $PROMPT_COMMAND"
 fi

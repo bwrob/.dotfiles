@@ -3,23 +3,30 @@
 # -- Common Settings --
 source ~/.sharedrc
 
-# -- ZSH specific --
-autoload -Uz compinit
-compinit
+# -- Performance: Cache Brew Prefix --
+BREW_PREFIX=$(brew --prefix)
 
-# -- oh-my-posh (Zsh specific) --
-if command -v oh-my-posh &>/dev/null; then
-    OH_MY_POSH_THEME="kali"
-    eval "$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/$OH_MY_POSH_THEME.omp.json)"
+# -- Smart History --
+setopt HIST_IGNORE_DUPS    # Don't record an entry that was just recorded.
+setopt HIST_IGNORE_SPACE   # Don't record entries starting with a space.
+setopt HIST_REDUCE_BLANKS  # Remove superfluous blanks from each command line being added to the history list.
+
+# -- ZSH specific --
+# Add Homebrew completion path to fpath
+if [[ -d "$BREW_PREFIX/share/zsh/site-functions" ]]; then
+    fpath=("$BREW_PREFIX/share/zsh/site-functions" $fpath)
 fi
 
-# -- Plugins --
-# Source brew installed plugins if they exist
-AUTOSUGGESTIONS="$(brew --prefix zsh-autosuggestions 2>/dev/null)"
-[[ -n "$AUTOSUGGESTIONS" ]] && source "$AUTOSUGGESTIONS/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+# -- oh-my-posh --
+if command -v oh-my-posh &>/dev/null; then
+    OH_MY_POSH_THEME="kali"
+    eval "$(oh-my-posh init zsh --config $BREW_PREFIX/themes/$OH_MY_POSH_THEME.omp.json)"
+fi
 
-HIGHLIGHTING="$(brew --prefix zsh-syntax-highlighting 2>/dev/null)"
-[[ -n "$HIGHLIGHTING" ]] && source "$HIGHLIGHTING/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+# -- Plugins (Hardcoded Paths for Speed) --
+# Source brew installed plugins if they exist
+[[ -f "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] && source "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+[[ -f "$BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]] && source "$BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 # -- fzf --
 if command -v fzf &>/dev/null; then
@@ -35,11 +42,20 @@ command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
 [[ -f ~/.ghcup/env ]] && . ~/.ghcup/env
 
 # -- Tool Completions --
-command -v uv &>/dev/null && eval "$(uv generate-shell-completion zsh)"
-command -v uvx &>/dev/null && eval "$(uvx --generate-shell-completion zsh)"
+# We will do a single compinit at the end
+# These generate files that compinit will find
+command -v uv &>/dev/null && [[ ! -f ~/.zfunc/_uv ]] && uv generate-shell-completion zsh > ~/.zfunc/_uv
+command -v uvx &>/dev/null && [[ ! -f ~/.zfunc/_uvx ]] && uvx --generate-shell-completion zsh > ~/.zfunc/_uvx
 
-fpath+=~/.zfunc; autoload -Uz compinit; compinit
+fpath+=(~/.zfunc)
+
+# -- Case-Insensitive Completion --
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' menu select
+
+# -- Single Consolidated compinit --
+autoload -Uz compinit
+compinit
 
 # -- Aliases (Apply & Config) --
 alias zsh.apply='source ~/.zshrc'

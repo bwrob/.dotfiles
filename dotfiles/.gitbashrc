@@ -11,6 +11,8 @@ ICON_GIT=""
 ICON_ARROW="─"
 ICON_CORNER_TOP="┌"
 ICON_CORNER_BOTTOM="└"
+ICON_STATUS_OK="uf42e"
+ICON_STATUS_ERROR=""
 
 # Colors (ANSI 256 or Standard)
 C_RESET="\[\e[0m\]"
@@ -19,14 +21,22 @@ C_GREEN="\[\e[38;5;82m\]"
 C_WHITE="\[\e[38;5;255m\]"
 C_CYAN="\[\e[38;5;51m\]"
 C_YELLOW="\[\e[38;5;226m\]"
+C_RED="\[\e[38;5;196m\]"
+C_GIT_CLEAN="\[\e[38;5;208m\]" # Orange
+C_GIT_DIRTY="\[\e[38;5;196m\]" # Red
 
 # Helper: Get Git Branch and Status
 function _git_prompt() {
     local branch
     branch=$(git branch --show-current 2>/dev/null)
     if [[ -n "$branch" ]]; then
+        local color="$C_GIT_CLEAN"
+        # Optimize Git Status: Ignore untracked files
+        if [[ -n $(git status --porcelain --untracked-files=no 2>/dev/null) ]]; then
+            color="$C_GIT_DIRTY"
+        fi
         # Kali theme style: -[branch]
-        echo -n "${C_GREEN}-${C_RESET}[${C_WHITE}${ICON_GIT} ${branch}${C_RESET}]"
+        echo -n "${C_GREEN}-${C_RESET}[${color}${ICON_GIT} ${branch}${C_RESET}]"
     fi
 }
 
@@ -42,23 +52,28 @@ function _venv_prompt() {
 function _set_ps1() {
     local EXIT_CODE=$?
     
+    # Exit Code Indicator
+    local STATUS_COLOR="$C_GREEN"
+    local STATUS_ICON="$ICON_STATUS_OK"
+    if [[ $EXIT_CODE -ne 0 ]]; then
+        STATUS_COLOR="$C_RED"
+        STATUS_ICON="$ICON_STATUS_ERROR"
+    fi
+
     # Top line: Session info
-    # ┌──(user㉿host)
     local TOP_LINE="${C_GREEN}${ICON_CORNER_TOP}${ICON_ARROW}${ICON_ARROW}(${C_CYAN}${USER}${ICON_SESSION}${HOSTNAME}${C_GREEN})"
     
     # Venv Segment
     TOP_LINE+="$(_venv_prompt)"
     
     # Path Segment
-    # -[path]
     TOP_LINE+="${C_GREEN}-${C_RESET}[${C_WHITE}\w${C_RESET}]"
     
     # Git Segment
     TOP_LINE+="$(_git_prompt)"
     
-    # Bottom line: Prompt symbol
-    # └─$ 
-    local BOTTOM_LINE="${C_GREEN}${ICON_CORNER_BOTTOM}${ICON_ARROW}${C_CYAN}\$ ${C_RESET}"
+    # Bottom line: Prompt symbol with status indicator
+    local BOTTOM_LINE="${C_GREEN}${ICON_CORNER_BOTTOM}${ICON_ARROW}${STATUS_COLOR}${STATUS_ICON} ${C_CYAN}\$ ${C_RESET}"
     
     PS1="\n${TOP_LINE}\n${BOTTOM_LINE}"
 }
