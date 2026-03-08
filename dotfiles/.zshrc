@@ -20,7 +20,8 @@ fi
 # -- oh-my-posh --
 if command -v oh-my-posh &>/dev/null; then
     OH_MY_POSH_THEME="kali"
-    eval "$(oh-my-posh init zsh --config $BREW_PREFIX/themes/$OH_MY_POSH_THEME.omp.json)"
+    # Themes are in the opt/oh-my-posh/themes/ directory of the brew prefix
+    eval "$(oh-my-posh init zsh --config $BREW_PREFIX/opt/oh-my-posh/themes/$OH_MY_POSH_THEME.omp.json)"
 fi
 
 # -- Plugins (Hardcoded Paths for Speed) --
@@ -42,7 +43,9 @@ command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
 [[ -f ~/.ghcup/env ]] && . ~/.ghcup/env
 
 # -- Tool Completions --
-# We will do a single compinit at the end
+# Ensure the directory exists
+mkdir -p ~/.zfunc
+
 # These generate files that compinit will find
 command -v uv &>/dev/null && [[ ! -f ~/.zfunc/_uv ]] && uv generate-shell-completion zsh > ~/.zfunc/_uv
 command -v uvx &>/dev/null && [[ ! -f ~/.zfunc/_uvx ]] && uvx --generate-shell-completion zsh > ~/.zfunc/_uvx
