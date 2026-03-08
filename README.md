@@ -21,7 +21,7 @@ These files are managed using the `stow` tool to ensure proper linking and organ
 2. Install dotfiles
 
    ```bash
-   cd ~/dotfiles && stow -v -R *
+   cd ~/dotfiles && stow -v -R dotfiles/
    ```
 
 3. Link needed VSC config into the project repo
@@ -50,7 +50,7 @@ These files are managed using the `stow` tool to ensure proper linking and organ
 2. **Update links using `stow`:**
 
    ```bash
-   stow -v -R  scripts terminal vscode
+   stow -v -R  dotfiles/
    ```
 
 **Uninstalling dotfiles:**
@@ -58,7 +58,7 @@ These files are managed using the `stow` tool to ensure proper linking and organ
 1. **Remove links using `stow`:**
 
    ```bash
-   stow -v -R --delete *
+   stow -v -R --delete dotfiles/
    ```
 
 2. **Delete the repository:**
