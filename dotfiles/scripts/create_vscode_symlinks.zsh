@@ -23,7 +23,7 @@ fi
 mkdir -p "$VSCODE_USER_DIR"
 
 # Path to this dotfiles repository
-DOTFILES_DIR="$HOME/.dotfiles"
+DOTFILES_DIR="$HOME/.vscode"
 
 # Files to link
 files=("settings.json" "keybindings.json" "extensions.json" "launch.json")
@@ -32,7 +32,7 @@ echo "Linking VS Code configuration to: $VSCODE_USER_DIR"
 
 for file in "${files[@]}"; do
     TARGET_FILE="$VSCODE_USER_DIR/$file"
-    SOURCE_FILE="$DOTFILES_DIR/vscode/$file"
+    SOURCE_FILE="$DOTFILES_DIR/$file"
 
     if [[ -f "$SOURCE_FILE" ]]; then
         # Handle existing target
@@ -56,7 +56,7 @@ for file in "${files[@]}"; do
             echo "  [✘] Failed to link $file"
         fi
     else
-        echo "  [ ] Skipping $file (not found in $DOTFILES_DIR/vscode/)"
+        echo "  [ ] Skipping $file (not found in $DOTFILES_DIR/)"
     fi
 done
 
