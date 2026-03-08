@@ -16,5 +16,33 @@
     helper =
     helper = !/home/linuxbrew/.linuxbrew/bin/gh auth git-credential
 
+[core]
+    editor = micro
+    whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+    compression = 9
+
+[init]
+    defaultBranch = main
+
 [push]
 	autoSetupRemote = true
+
+[pull]
+    rebase = true
+
+[fetch]
+    prune = true
+
+[color]
+    ui = auto
+
+[diff]
+    algorithm = histogram
+    colorMoved = plain
+
+[alias]
+    st = status
+    co = checkout
+    br = branch
+    aa = add --all
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
