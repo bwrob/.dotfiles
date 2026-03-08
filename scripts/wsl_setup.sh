@@ -2,9 +2,16 @@
 
 # This script is a quick and dirty hack to get Linux in Windows and WSL. It's not meant to be a full setup.
 # I just wanted to get some experience with WSL and Homebrew.
-sudo apt-get upgrade -y && sudo apt-get install build-essential git -y
+sudo apt-get upgrade -y
+sudo apt-get install -y \
+   build-essential \
+   git \
+   zsh \
+   curl \
+   wezterm \
 
 # Install Homebrew
+
 echo "--- Installing Homebrew ---"
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" && brew doctor
@@ -17,6 +24,7 @@ echo 'autoload -U compinit && compinit' >> ~/.zshrc
 
 # Install other tools
 echo "--- Installing other tools ---"
+
 brew install \
     bat \
     cmake \
@@ -31,12 +39,21 @@ brew install \
     gh \
     yazi \
     uv \
-    quarto \
+    helix \
+    eza \
+    gemini-cli \
+    lynx \
+    stow \
+    zellij \
+    micro \
 
-uv tool install poethepoet pre-commit pytest ruff basedpyright hapless
+# Python tools managed by uv
+
+uv tool install poethepoet pre-commit pytest ruff basedpyright hapless 'python-lsp-server[all]'
 
 gh auth login
-# Install Quarto
+
+# Install Quarto and 
 quarto install tinytex
 quarto install chromium
 quarto check

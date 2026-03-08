@@ -18,7 +18,7 @@ else
 fi
 
 # -- rust --
-source "$HOME/.cargo/env"
+# source "$HOME/.cargo/env"
 
 
 # -- oh-my-posh --
@@ -55,9 +55,14 @@ fastfetch -c ~/.fastfetch_config.json
 if [[ -d .venv ]]; then
     source .venv/bin/activate
 fi
+
 eval "$(uv generate-shell-completion zsh)"
 eval "$(uvx --generate-shell-completion zsh)"
 
 fpath+=~/.zfunc; autoload -Uz compinit; compinit
 
 zstyle ':completion:*' menu select
+
+
+export HOMEBREW_NO_ENV_HINTS=1
+export EDITOR='micro'
