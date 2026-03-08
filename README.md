@@ -24,20 +24,13 @@ These files are managed using the `stow` tool to ensure proper linking and organ
    cd ~/dotfiles && stow -v -R dotfiles/
    ```
 
-3. Link VS Code configuration into your project
+3. Setup VS Code (Cross-Platform)
 
    ```bash
-   mkdir -p .vscode
-   ln -sf ~/.dotfiles/vscode/*.json .vscode/
+   chmod +x ~/dotfiles/dotfiles/scripts/create_vscode_symlinks.zsh
+   ~/dotfiles/dotfiles/scripts/create_vscode_symlinks.zsh
    ```
 
-**Configuration:**
-
-* **zshrc:** The primary configuration file for Zsh. Customize it to your preferences.
-* **aliases:** A file containing custom shell aliases.
-* **vscode/settings.json:** Global VS Code configuration settings.
-* **vscode/extensions.json:** Recommended VS Code extensions.
-* **vscode/launch.json:** Shared VS Code debug configurations.
 
 **Updating dotfiles:**
 
