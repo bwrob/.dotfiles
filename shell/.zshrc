@@ -32,8 +32,23 @@ fi
 # -- fzf --
 if command -v fzf &>/dev/null; then
     source <(fzf --zsh)
-    export FZF_CTRL_T_OPTS="--preview 'bat -n --color=always --line-range :500 {}'"
-    export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
+
+    # Dracula-inspired colors for fzf
+    export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --margin=1 --padding=1 \
+    --color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 \
+    --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 \
+    --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 \
+    --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4'
+
+    # Use fd (if available) for faster searching and to respect .gitignore
+    if command -v fd &>/dev/null; then
+        export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
+        export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+    fi
+
+    # Enhanced Previews
+    export FZF_CTRL_T_OPTS="--preview 'bat -n --color=always --line-range :500 {}' --preview-window=right:60%"
+    export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200' --preview-window=right:60%"
 fi
 
 # -- zoxide --

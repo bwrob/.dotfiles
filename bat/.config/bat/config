@@ -1,0 +1,20 @@
+# Bat Configuration
+# Reference: https://github.com/sharkdp/bat#configuration-file
+
+# Set the theme to Dracula
+# --theme="Dracula"
+
+# Use less for paging, but only if the content doesn't fit on one screen.
+# -R: Output "raw" control characters (for colors)
+# -F: Quit if the entire file can be displayed on one screen
+# -X: Do not send clear-screen strings to the terminal
+--pager="less -RFX"
+
+# Show non-printable characters like tabs or space indicators
+#c--show-all
+
+# Enable italic text in the output (if supported by terminal)
+--italic-text=always
+
+# Wrap long lines
+--wrap=never

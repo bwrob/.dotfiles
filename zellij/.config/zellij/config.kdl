@@ -1,0 +1,64 @@
+// Zellij Configuration
+// Reference: https://zellij.dev/documentation/config
+
+keybinds {
+    normal {
+        // Switch to the 'pane' mode with 'ALT + p'
+        bind "Alt p" { SwitchToMode "Pane"; }
+        // Switch to the 'tab' mode with 'ALT + n'
+        bind "Alt n" { SwitchToMode "Tab"; }
+        // Switch to the 'resize' mode with 'ALT + r'
+        bind "Alt r" { SwitchToMode "Resize"; }
+        // Switch to the 'move' mode with 'ALT + m'
+        bind "Alt m" { SwitchToMode "Move"; }
+        // Switch to the 'scroll' mode with 'ALT + s'
+        bind "Alt s" { SwitchToMode "Scroll"; }
+        // Search in scrollback with 'ALT + f'
+        bind "Alt f" { SwitchToMode "Search"; }
+        // Session management with 'ALT + o'
+        bind "Alt o" { SwitchToMode "Session"; }
+    }
+}
+
+// AdventureTime-like Theme (vibrant, playful)
+themes {
+    adventure-time {
+        fg "#4E312F"
+        bg "#FFD966"
+        black "#1A1A1A"
+        red "#E3242B"
+        green "#4A90E2"
+        yellow "#F1C40F"
+        blue "#3498DB"
+        magenta "#8E44AD"
+        cyan "#2ECC71"
+        white "#FDFDFD"
+        orange "#E67E22"
+    }
+}
+
+theme "adventure-time"
+
+// Layout and UI Settings
+layout {
+    pane size=1 borderless=true {
+        plugin location="zellij:tab-bar"
+    }
+    pane
+    pane size=2 borderless=true {
+        plugin location="zellij:status-bar"
+    }
+}
+
+ui {
+    pane_frames {
+        rounded_corners true
+    }
+}
+
+// Additional Settings
+default_layout "default"
+mouse_mode true
+copy_on_select true
+scrollback_lines_to_serialize 10000
+mirror_session false

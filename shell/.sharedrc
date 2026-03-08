@@ -61,12 +61,38 @@ fi
 
 # -- Common Aliases --
 alias cat='bat'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias dot='cd ~/dotfiles'
+
+# zoxide shorthand
+if command -v zoxide &>/dev/null; then
+    alias j='z'
+    alias ji='zi'
+fi
+
 if [[ "$USE_ICONS" == "true" ]]; then
+    alias ls='eza --icons=always --group-directories-first'
+    alias ll='eza -l --icons=always --group-directories-first --git --time-style=long-iso'
+    alias la='eza -la --icons=always --group-directories-first --git'
+    alias lt='eza --tree --level=2 --icons=always --group-directories-first'
+    alias l.='eza -d .* --icons=always'
+
+    # Legacy 'dir' aliases (keeping for compatibility)
     alias dir="eza -l --group-directories-first --no-filesize --icons=always --no-time --no-user --git-ignore"
     alias dir.all="eza -l --group-directories-first --no-filesize --icons=always --no-time --no-user --git-ignore --all"
     alias dir.git="eza -l --group-directories-first --no-filesize --icons=always --no-time --no-user --git "
     alias dir.tree="eza -l --group-directories-first --no-filesize --icons=always --no-time --no-user --git-ignore --tree --level 2"
 else
+    alias ls='eza --group-directories-first'
+    alias ll='eza -l --group-directories-first --git --time-style=long-iso'
+    alias la='eza -la --group-directories-first --git'
+    alias lt='eza --tree --level=2 --group-directories-first'
+    alias l.='eza -d .*'
+
+    # Legacy 'dir' aliases
     alias dir="eza -l --group-directories-first --no-filesize --no-time --no-user --git-ignore"
     alias dir.all="eza -l --group-directories-first --no-filesize --no-time --no-user --git-ignore --all"
     alias dir.git="eza -l --group-directories-first --no-filesize --no-time --no-user --git "
