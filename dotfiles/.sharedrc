@@ -20,8 +20,8 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     elif [[ -x /usr/local/bin/brew ]]; then
         eval "$(/usr/local/bin/brew shellenv)"
     fi
-elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    # Linux (Linuxbrew)
+elif [[ "$OSTYPE" == linux* ]]; then
+    # Linux (Linuxbrew) - Broadened check for Ubuntu/WSL/etc.
     if [[ -x /home/linuxbrew/.linuxbrew/bin/brew ]]; then
         eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
         export XDG_DATA_DIRS="/home/linuxbrew/.linuxbrew/share:$XDG_DATA_DIRS"
@@ -75,15 +75,20 @@ fi
 
 # -- Fastfetch --
 # Check if config exists and ensure it only runs once per session
-if [[ -z "$FASTFETCH_RUN" ]] && command -v fastfetch &>/dev/null; then
-    export FASTFETCH_RUN=1
-    # Check standard path, then local repo path as fallback
-    if [[ -f "$HOME/.config/fastfetch/config.json" ]]; then
-        fastfetch -c "$HOME/.config/fastfetch/config.json"
-    elif [[ -f "$HOME/.dotfiles/dotfiles/.config/fastfetch/config.json" ]]; then
-        fastfetch -c "$HOME/.dotfiles/dotfiles/.config/fastfetch/config.json"
-    else
-        fastfetch
+if [[ -z "$FASTFETCH_RUN" ]]; then
+    # Try to find fastfetch even if PATH is not fully initialized
+    FF_BIN=$(command -v fastfetch || which fastfetch 2>/dev/null)
+    
+    if [[ -n "$FF_BIN" ]]; then
+        export FASTFETCH_RUN=1
+        # Check standard path, then local repo path as fallback
+        if [[ -f "$HOME/.config/fastfetch/config.json" ]]; then
+            "$FF_BIN" -c "$HOME/.config/fastfetch/config.json"
+        elif [[ -f "$HOME/.dotfiles/dotfiles/.config/fastfetch/config.json" ]]; then
+            "$FF_BIN" -c "$HOME/.dotfiles/dotfiles/.config/fastfetch/config.json"
+        else
+            "$FF_BIN"
+        fi
     fi
 fi
 
