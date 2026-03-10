@@ -12,23 +12,34 @@ These files are managed using the `stow` tool to ensure proper linking and organ
 
 ## Usage
 
-1. Clone the repository
+1. **Clone the repository**
 
    ```bash
-   cd ~ && gh repo clone dotfiles
+   cd ~ && git clone https://github.com/bwrob/dotfiles.git .dotfiles
    ```
 
-2. Install dotfiles
+2. **Run the setup script (macOS or Ubuntu/WSL)**
+
+   This will install Homebrew, all dependencies via the `Brewfile`, and set up your shell.
 
    ```bash
-   cd ~/dotfiles && stow -v -R dotfiles/
+   cd ~/.dotfiles
+   chmod +x scripts/shell_setup.sh
+   ./scripts/shell_setup.sh
    ```
 
-3. Setup VS Code (Cross-Platform)
+3. **Install dotfiles using `stow`**
 
    ```bash
-   chmod +x ~/dotfiles/dotfiles/scripts/create_vscode_symlinks.zsh
-   ~/dotfiles/dotfiles/scripts/create_vscode_symlinks.zsh
+   # Link all packages (bat, helix, homebrew, etc.)
+   stow -v -R bat fastfetch git helix micro shell vscode wezterm yazi zellij homebrew
+   ```
+
+4. **Setup VS Code Symlinks**
+
+   ```bash
+   chmod +x scripts/create_vscode_symlinks.zsh
+   ./scripts/create_vscode_symlinks.zsh
    ```
 
 

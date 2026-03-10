@@ -1,59 +1,74 @@
 #!/bin/bash
 
-# This script is a quick and dirty hack to get Linux in Windows and WSL. It's not meant to be a full setup.
-# I just wanted to get some experience with WSL and Homebrew.
-sudo apt-get upgrade -y
-sudo apt-get install -y \
-   build-essential \
-   git \
-   zsh \
-   curl \
-   wezterm \
+set -e # Exit on error
 
-# Install Homebrew
+echo "--- Starting Dotfiles Setup ---"
 
-echo "--- Installing Homebrew ---"
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" && brew doctor
-echo 'export XDG_DATA_DIRS="/home/linuxbrew/.linuxbrew/share:$XDG_DATA_DIRS"' >> ~/.profile
+# -- OS Detection --
+OS="$(uname -s)"
+case "$OS" in
+    Linux*)     DISTRO="Linux";;
+    Darwin*)    DISTRO="macOS";;
+    *)          DISTRO="UNKNOWN";;
+esac
 
-(echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/bwrob/.zshrc
-echo $SHELL &&  sudo chsh -s $(which zsh) &&  echo $SHELL
+echo "Detected OS: $DISTRO"
 
-echo 'autoload -U compinit && compinit' >> ~/.zshrc
+# -- System Package Updates (Ubuntu Only) --
+if [[ "$DISTRO" == "Linux" ]] && command -v apt-get &>/dev/null; then
+    echo "--- Updating Ubuntu Packages ---"
+    sudo apt-get update && sudo apt-get upgrade -y
+    sudo apt-get install -y build-essential curl git zsh
+fi
 
-# Install other tools
-echo "--- Installing other tools ---"
+# -- Homebrew Installation --
+if ! command -v brew &>/dev/null; then
+    echo "--- Installing Homebrew ---"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    
+    # Setup shellenv based on OS
+    if [[ "$DISTRO" == "Linux" ]]; then
+        eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    else
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+    fi
+else
+    echo "Homebrew already installed, skipping..."
+fi
 
-brew install \
-    bat \
-    cmake \
-    fzf \
-    neovim \
-    fastfetch  \
-    oh-my-posh \
-    tmux \
-    zoxide \
-    zsh-autosuggestions \
-    zsh-syntax-highlighting \
-    gh \
-    yazi \
-    uv \
-    helix \
-    eza \
-    gemini-cli \
-    lynx \
-    stow \
-    zellij \
-    micro \
+# -- Brew Bundle (Standardized Setup) --
+echo "--- Installing Tools via Brewfile ---"
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+brew bundle --file="$REPO_ROOT/homebrew/Brewfile"
 
-# Python tools managed by uv
+# -- Python Tools (uv) --
+if command -v uv &>/dev/null; then
+    echo "--- Installing Python Tools ---"
+    uv tool install poethepoet pre-commit pytest ruff basedpyright hapless 'python-lsp-server[all]' --force
+fi
 
-uv tool install poethepoet pre-commit pytest ruff basedpyright hapless 'python-lsp-server[all]'
+# -- Quarto Extras (Linux Only - Cask handles macOS) --
+if [[ "$DISTRO" == "Linux" ]]; then
+    if command -v quarto &>/dev/null; then
+        echo "--- Setting up Quarto ---"
+        quarto install tinytex || true
+        quarto install chromium || true
+    fi
+fi
 
-gh auth login
+# -- Shell Setup --
+# Only change shell if it's not already zsh
+if [[ "$SHELL" != *"zsh"* ]]; then
+    echo "--- Changing Shell to Zsh ---"
+    sudo chsh -s "$(which zsh)" "$USER"
+fi
 
-# Install Quarto and
-quarto install tinytex
-quarto install chromium
-quarto check
+# Ensure Zsh config exists and source brew
+ZSHRC="$HOME/.zshrc"
+BREW_INIT='eval "$($(brew --prefix)/bin/brew shellenv)"'
+if ! grep -q "brew shellenv" "$ZSHRC" 2>/dev/null; then
+    echo "--- Adding Homebrew to $ZSHRC ---"
+    echo "$BREW_INIT" >> "$ZSHRC"
+fi
+
+echo "--- Setup Complete! Please restart your terminal. ---"

@@ -1,0 +1,35 @@
+# -- Taps --
+tap "homebrew/bundle"
+tap "homebrew/services"
+
+# -- Core CLI Tools --
+brew "bat"
+brew "cmake"
+brew "eza"
+brew "fastfetch"
+brew "fzf"
+brew "gcc"
+brew "gh"
+brew "git"
+brew "helix"
+brew "lynx"
+brew "micro"
+brew "neovim"
+brew "oh-my-posh"
+brew "stow"
+brew "tmux"
+brew "uv"
+brew "yazi"
+brew "zellij"
+brew "zoxide"
+
+# -- Shell Enhancements --
+brew "zsh"
+brew "zsh-autosuggestions"
+brew "zsh-syntax-highlighting"
+
+# -- GUI Tools (Casks - only for macOS) --
+# These will be ignored on Linux unless you use a specific tap/provider
+cask "wezterm" if OS.mac?
+cask "visual-studio-code" if OS.mac?
+cask "quarto" if OS.mac?
