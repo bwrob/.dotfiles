@@ -39,7 +39,7 @@ fi
 # -- Brew Bundle (Standardized Setup) --
 echo "--- Installing Tools via Brewfile ---"
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-brew bundle --file="$REPO_ROOT/homebrew/Brewfile"
+brew bundle --file="$REPO_ROOT/homebrew/.brewfile"
 
 # -- Python Tools (uv) --
 if command -v uv &>/dev/null; then
