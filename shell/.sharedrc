@@ -65,7 +65,9 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
-alias dot='cd ~/dotfiles'
+alias dot='cd ~/.dotfiles'
+alias bundle='brew bundle --file=~/.brewfile'
+alias dotstow='pushd ~/.dotfiles > /dev/null && stow -v -R */ && popd > /dev/null'
 
 # zoxide shorthand
 if command -v zoxide &>/dev/null; then
