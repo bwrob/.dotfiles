@@ -29,3 +29,4 @@ brew "zsh-syntax-highlighting"
 cask "wezterm" if OS.mac?
 cask "visual-studio-code" if OS.mac?
 cask "quarto" if OS.mac?
+brew "rtk"
