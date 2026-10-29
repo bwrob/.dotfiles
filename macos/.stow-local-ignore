@@ -1,0 +1,9 @@
+\.git
+\.gitignore
+\.github
+\.pre-commit-config\.yaml
+^/README.*
+^/LICENSE.*
+^/setup\.sh$
+^/windows$
+\.DS_Store

@@ -21,6 +21,7 @@ export SUDO_EDITOR="$EDITOR"
 alias cat='bat'
 alias .....='cd ../../../..'
 alias dot='cd ~/dev/.dotfiles'
+alias dotstow='stow -d ~/dev/.dotfiles -t ~ -v -R common omarchy'
 alias ll='eza -l --icons=always --group-directories-first --git --time-style=long-iso'
 alias la='eza -la --icons=always --group-directories-first --git'
 alias l.='eza -d .* --icons=always'
