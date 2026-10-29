@@ -1,0 +1,55 @@
+{
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+    "display": {
+        "separator": " \u279c  ",
+        "size": {
+            "maxPrefix": "GB",
+            "ndigits": 0
+        }
+    },
+    "logo": {
+        "padding": {
+            "top": 1
+        }
+    },
+    "modules": [
+        "title",
+        "separator",
+        {
+            "format": "{3} {12}",
+            "type": "os"
+        },
+        "host",
+        "kernel",
+        "uptime",
+        "shell",
+        "packages",
+        "break",
+        {
+            "temp": true,
+            "type": "cpu"
+        },
+        "gpu",
+        "memory",
+        {
+            "folders": "/",
+            "format": "{1} / {2} ({3})",
+            "key": "Disk",
+            "type": "disk"
+        },
+        "loadavg",
+        "processes",
+        "break",
+        {
+            "key": "LAN IP",
+            "showIpv6": true,
+            "showPrefixLen": false,
+            "type": "localip"
+        },
+        {
+            "key": "WAN IP",
+            "timeout": 1000,
+            "type": "publicip"
+        }
+    ]
+}

@@ -1,73 +1,50 @@
-# dotfiles
+# .dotfiles
 
-This repository holds my personal dotfiles, which are configuration files for various applications and tools on my Linux system.
+Personal dotfiles organized into a shared `common/` layer plus clean, per-OS Stow packages:
 
-These files are managed using the `stow` tool to ensure proper linking and organization.
+```text
+.dotfiles/
+├── common/     # Shared tool configs (VS Code, Helix, Yazi, Zellij, Bat, Lazygit, Tmux, RTK, Starship)
+├── macos/      # macOS (Apple Silicon Homebrew, WezTerm, Zsh, Gitconfig)
+├── ubuntu/     # Native Ubuntu Linux (Linuxbrew, WezTerm, Zsh, Bash, Gitconfig)
+├── win-wsl/    # Windows + WSL2 Ubuntu (WSL Zsh/Linuxbrew + Windows-host WezTerm & Git Bash)
+└── omarchy/    # Omarchy Arch/Hyprland desktop + custom Van Gogh "Almond Blossom" theme
+```
 
-## Requirements
+## Quick Start
 
-* Ubuntu Linux system
-* Zsh shell
-* `stow` package installed (`brew install stow`)
-
-## Usage
-
-1. **Clone the repository**
-
-   ```bash
-   cd ~ && git clone https://github.com/bwrob/dotfiles.git .dotfiles
-   ```
-
-2. **Run the setup script (macOS or Ubuntu/WSL)**
-
-   This will install Homebrew, all dependencies via the `Brewfile`, and set up your shell.
+1. **Clone the repository:**
 
    ```bash
+   git clone https://github.com/bwrob/.dotfiles.git ~/.dotfiles
    cd ~/.dotfiles
-   chmod +x scripts/shell_setup.sh
-   ./scripts/shell_setup.sh
    ```
 
-3. **Install dotfiles using `stow`**
+2. **Run the setup script for your OS:**
 
    ```bash
-   # Link all packages (bat, helix, homebrew, etc.)
-   stow -v -R bat fastfetch git helix micro shell vscode wezterm yazi zellij homebrew
+   # macOS
+   ./macos/setup.sh
+
+   # Ubuntu
+   ./ubuntu/setup.sh
+
+   # Windows WSL (Ubuntu)
+   ./win-wsl/setup.sh
+
+   # Omarchy (Arch + Hyprland)
+   ./omarchy/setup.sh
    ```
 
-4. **Setup VS Code Symlinks**
+## Re-stowing Configs Only
 
-   ```bash
-   chmod +x scripts/create_vscode_symlinks.zsh
-   ./scripts/create_vscode_symlinks.zsh
-   ```
+Each setup stows `common` alongside the target OS folder:
 
+```bash
+stow -d ~/.dotfiles -t ~ -v -R common macos
+stow -d ~/.dotfiles -t ~ -v -R common ubuntu
+stow -d ~/.dotfiles -t ~ -v -R common win-wsl
+stow -d ~/.dotfiles -t ~ -v -R common omarchy
+```
 
-**Updating dotfiles:**
-
-1. **Pull changes from the remote repository:**
-
-   ```bash
-   cd ~/.dotfiles
-   git pull
-   ```
-
-2. **Update links using `stow`:**
-
-   ```bash
-   stow -v -R  dotfiles/
-   ```
-
-**Uninstalling dotfiles:**
-
-1. **Remove links using `stow`:**
-
-   ```bash
-   stow -v -R --delete dotfiles/
-   ```
-
-2. **Delete the repository:**
-
-   ```bash
-   rm -rf ~/.dotfiles
-   ```
+Inside each shell environment, the `dotstow` alias re-stows `common` + the active OS profile automatically.

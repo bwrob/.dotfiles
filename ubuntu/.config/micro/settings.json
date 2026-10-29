@@ -1,0 +1,20 @@
+{
+    "autoclose": true,
+    "autoindent": true,
+    "colorscheme": "dracula",
+    "cursorline": true,
+    "ignorecase": true,
+    "incsearch": true,
+    "infobar": true,
+    "mouse": true,
+    "relativelinediff": false,
+    "rmtrailingws": true,
+    "saveundo": true,
+    "scrollbar": true,
+    "smartcase": true,
+    "softwrap": true,
+    "statusformatl": "$(filename) $(modified)| $(line):$(col) | $(opt:filetype) | $(opt:encoding)",
+    "statusformatr": "$(bind:Ctrl-q) to quit, $(bind:Ctrl-s) to save",
+    "tabsize": 4,
+    "tabstospaces": true
+}
