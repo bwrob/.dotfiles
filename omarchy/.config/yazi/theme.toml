@@ -1,0 +1,109 @@
+# Yazi Theme (AdventureTime)
+# Reference: https://yazi-rs.github.io/docs/configuration/theme
+
+[manager]
+cwd = { fg = "#3498DB" }
+
+# Hover
+hovered         = { fg = "#4E312F", bg = "#FFD966" }
+preview_hovered = { underline = true }
+
+# Selection
+selected = { fg = "#F1C40F", bg = "#4E312F", bold = true }
+
+# Find
+find_keyword  = { fg = "#E3242B", italic = true }
+find_position = { fg = "#8E44AD" }
+
+# Marker
+marker_selected = { fg = "#2ECC71" }
+marker_copied   = { fg = "#F1C40F" }
+marker_cut      = { fg = "#E3242B" }
+
+# Tab
+tab_active   = { fg = "#4E312F", bg = "#FFD966" }
+tab_inactive = { fg = "#FDFDFD", bg = "#1A1A1A" }
+tab_width    = 1
+
+# Count
+count_selected = { fg = "#F1C40F" }
+count_copied   = { fg = "#F1C40F" }
+count_cut      = { fg = "#E3242B" }
+
+# Border
+border_symbol = "│"
+border_style  = { fg = "#FFD966" }
+
+# Highlighting
+syntect_theme = "~/.config/yazi/adventure-time.tmTheme"
+
+[status]
+separator_open  = ""
+separator_close = ""
+
+# Mode
+mode_normal = { fg = "#1A1A1A", bg = "#FFD966", bold = true }
+mode_select = { fg = "#1A1A1A", bg = "#2ECC71", bold = true }
+mode_unset  = { fg = "#1A1A1A", bg = "#E3242B", bold = true }
+
+# Progress
+progress_label  = { fg = "#FDFDFD", bold = true }
+progress_normal = { fg = "#3498DB", bg = "#1A1A1A" }
+progress_error  = { fg = "#E3242B", bg = "#1A1A1A" }
+
+# Permissions
+permissions_t = { fg = "#3498DB" }
+permissions_r = { fg = "#F1C40F" }
+permissions_w = { fg = "#E3242B" }
+permissions_x = { fg = "#2ECC71" }
+permissions_s = { fg = "#8E44AD" }
+
+[input]
+border   = { fg = "#FFD966" }
+title    = { }
+value    = { }
+selected = { reversed = true }
+
+[select]
+border   = { fg = "#FFD966" }
+active   = { fg = "#F1C40F" }
+inactive = { }
+
+[tasks]
+border  = { fg = "#FFD966" }
+title   = { }
+hovered = { underline = true }
+
+[which]
+mask            = { bg = "#1A1A1A" }
+cand            = { fg = "#3498DB" }
+rest            = { fg = "#8E44AD" }
+desc            = { fg = "#FDFDFD" }
+separator       = " ➜ "
+separator_style = { fg = "#FFD966" }
+
+[help]
+on      = { fg = "#2ECC71" }
+run     = { fg = "#8E44AD" }
+desc    = { fg = "#FDFDFD" }
+hovered = { bg = "#FFD966", fg = "#4E312F" }
+footer  = { fg = "#FFD966" }
+
+[filetype]
+rules = [
+	# Images
+	{ mime = "image/*", fg = "#3498DB" },
+	# Videos
+	{ mime = "video/*", fg = "#E3242B" },
+	# Audio
+	{ mime = "audio/*", fg = "#E3242B" },
+	# Archive
+	{ mime = "application/zip", fg = "#8E44AD" },
+	{ mime = "application/x-tar", fg = "#8E44AD" },
+	{ mime = "application/x-bzip2", fg = "#8E44AD" },
+	{ mime = "application/x-gzip", fg = "#8E44AD" },
+	{ mime = "application/x-7z-compressed", fg = "#8E44AD" },
+	{ mime = "application/x-rar", fg = "#8E44AD" },
+	# Empty
+	{ mime = "inode/x-empty", fg = "#E3242B" },
+]

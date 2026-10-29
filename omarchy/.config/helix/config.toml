@@ -1,0 +1,50 @@
+# Helix Configuration
+# Reference: https://docs.helix-editor.com/configuration.html
+
+theme = "dracula"
+
+[editor]
+line-number = "relative"
+mouse = true
+cursorline = true
+auto-pairs = true
+auto-completion = true
+completion-trigger-len = 2
+bufferline = "always"
+color-modes = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.file-picker]
+hidden = false
+
+[editor.statusline]
+left = ["mode", "spacer", "spinner", "spacer", "file-name", "spacer", "file-modification-indicator"]
+center = []
+right = ["diagnostics", "selections", "position", "file-encoding", "file-line-ending", "file-type"]
+separator = "│"
+
+[editor.lsp]
+display-messages = true
+display-inlay-hints = true
+
+[editor.indent-guides]
+render = true
+character = "┊"
+skip-indent-level = 1
+
+[editor.whitespace.render]
+space = "none"
+tab = "all"
+newline = "none"
+
+[keys.normal]
+esc = ["collapse_selection", "keep_primary_selection"]
+C-s = ":w"
+C-q = ":q"
+# Quick navigation between buffers
+"C-[" = ":buffer-previous"
+"C-]" = ":buffer-next"
