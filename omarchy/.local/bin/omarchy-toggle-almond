@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+CURRENT="$(omarchy theme current 2>/dev/null || true)"
+
+case "${CURRENT,,}" in
+    "almond blossom")
+        NEXT="Almond Blossom Mono"
+        ;;
+    *)
+        NEXT="Almond Blossom"
+        ;;
+esac
+
+omarchy theme set "$NEXT"
+notify-send -a "Omarchy Theme" "Theme Switched" "$NEXT" -i preferences-desktop-theme 2>/dev/null || true
