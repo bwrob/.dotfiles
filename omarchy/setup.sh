@@ -29,6 +29,11 @@ PKGS=(
 
 if command -v omarchy &>/dev/null; then
     omarchy pkg add "${PKGS[@]}"
+    if ! command -v zen-browser &>/dev/null; then
+        echo "--- Installing Zen Browser ---"
+        omarchy install browser zen || true
+    fi
+    omarchy default browser zen || true
 elif command -v pacman &>/dev/null; then
     sudo pacman -S --needed --noconfirm "${PKGS[@]}"
 fi
