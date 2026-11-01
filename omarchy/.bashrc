@@ -13,6 +13,7 @@ source "$OMARCHY_PATH/default/bash/rc"
 # ------------------------------------------------------------------------------
 alias dot='cd ~/dev/.dotfiles'
 alias dotstow='stow -d ~/dev/.dotfiles -t ~ -v -R common omarchy'
+alias dotpkgs='dotfiles-update-pkgs'
 alias bash.apply='source ~/.bashrc'
 alias bash.config='micro ~/.bashrc'
 alias .....='cd ../../../..'

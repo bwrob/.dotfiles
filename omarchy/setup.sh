@@ -23,13 +23,16 @@ else
         helix
         imagemagick
         just
+        lazydocker
         lazygit
         micro
         mise
+        obsidian-appimage
         ollama
         starship
         stow
         tailscale
+        taplo-cli
         tmux
         uv
         watchexec
