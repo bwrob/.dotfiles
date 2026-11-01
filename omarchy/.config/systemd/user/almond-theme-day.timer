@@ -1,0 +1,9 @@
+[Unit]
+Description=Switch to Almond Blossom theme at 07:30 AM
+
+[Timer]
+OnCalendar=*-*-* 07:30:00
+Persistent=false
+
+[Install]
+WantedBy=timers.target

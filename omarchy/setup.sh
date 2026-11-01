@@ -44,9 +44,15 @@ mkdir -p "$HOME/.config/zellij/themes"
 ln -sf "$HOME/.local/state/omarchy/current/theme/zellij.kdl" "$HOME/.config/zellij/themes/omarchy.kdl"
 
 if command -v omarchy &>/dev/null; then
-    echo "--- Applying Almond Blossom theme ---"
-    omarchy hyprland window transparency transparent || true
+    echo "--- Applying Almond Blossom theme & transparency ---"
+    omarchy hyprland window transparency glassy || true
     omarchy theme set "Almond Blossom"
+fi
+
+if command -v systemctl &>/dev/null; then
+    echo "--- Enabling day/night theme timers ---"
+    systemctl --user daemon-reload
+    systemctl --user enable --now almond-theme-day.timer almond-theme-night.timer
 fi
 
 echo "--- Omarchy Setup Complete ---"

@@ -1,0 +1,9 @@
+[Unit]
+Description=Switch to Almond Blossom Mono theme at 19:30 (7:30 PM)
+
+[Timer]
+OnCalendar=*-*-* 19:30:00
+Persistent=false
+
+[Install]
+WantedBy=timers.target
