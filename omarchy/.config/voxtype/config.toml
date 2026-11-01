@@ -53,11 +53,11 @@ translate = false
 # Number of CPU threads for inference (tuned for Apple Silicon M2 Pro 6 P-cores)
 threads = 6
 
-# Optimize context window for short push-to-talk recordings
-context_window_optimization = true
+# Optimize context window for short push-to-talk recordings (false keeps Whisper's native 30s context to prevent hallucinations)
+context_window_optimization = false
 
-# Initial prompt biases vocabulary, spelling, and proper nouns
-initial_prompt = "Voxtype voice dictation on Arch Linux, Hyprland, and Omarchy. Developer bwrob working in ~/dev on Zenith, debug-dojo, trash-gather, Taplo, and rust-playground. Tools: uv, Ruff, Pyrefly, Zensical, rumdl, complexipy, typos, prek, tach, cosmic-ray, pytest, Cookiecutter. Languages and utilities: Rust, Cargo, Clippy, rustfmt, trpl, TOML, LSP, C++, Python, FZF, eff, ff, bat, yazi, zellij, tmux, starship, helix, micro, XCompose, fcitx5, Wayland, Git, GitHub."
+# Initial prompt biases vocabulary and style (kept concise to prevent prompt bleeding/hallucinations)
+initial_prompt = "Voice dictation with Voxtype on Omarchy Linux and Hyprland."
 
 [output]
 # Primary output mode: "type" or "clipboard"
