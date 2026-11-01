@@ -30,6 +30,8 @@ else
         obsidian-appimage
         ollama
         omarchy-steam-fex
+        snap-pac
+        snapper
         starship
         steam
         stow
@@ -82,9 +84,9 @@ if command -v omarchy &>/dev/null; then
 fi
 
 if command -v systemctl &>/dev/null; then
-    echo "--- Enabling day/night theme timers ---"
+    echo "--- Enabling user services & theme timers ---"
     systemctl --user daemon-reload
-    systemctl --user enable --now almond-theme-day.timer almond-theme-night.timer
+    systemctl --user enable --now almond-theme-day.timer almond-theme-night.timer hyprsunset.service
 fi
 
 echo "--- Omarchy Setup Complete ---"

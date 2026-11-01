@@ -4,3 +4,4 @@ Description=Set Almond Blossom (Day) Theme
 [Service]
 Type=oneshot
 ExecStart=/usr/bin/env omarchy theme set "Almond Blossom"
+ExecStartPost=-/usr/bin/env hyprsunset -i

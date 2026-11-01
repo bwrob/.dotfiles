@@ -4,3 +4,4 @@ Description=Set Almond Blossom Mono (Night) Theme
 [Service]
 Type=oneshot
 ExecStart=/usr/bin/env omarchy theme set "Almond Blossom Mono"
+ExecStartPost=-/usr/bin/env hyprsunset -t 4200

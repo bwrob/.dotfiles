@@ -20,6 +20,8 @@ mise
 obsidian-appimage
 ollama
 omarchy-steam-fex
+snap-pac
+snapper
 starship
 steam
 stow

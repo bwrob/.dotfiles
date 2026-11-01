@@ -6,9 +6,11 @@ CURRENT="$(omarchy theme current 2>/dev/null || true)"
 case "${CURRENT,,}" in
     "almond blossom")
         NEXT="Almond Blossom Mono"
+        hyprsunset -t 4200 &>/dev/null &
         ;;
     *)
         NEXT="Almond Blossom"
+        hyprsunset -i &>/dev/null &
         ;;
 esac
 
