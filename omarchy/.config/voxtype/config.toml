@@ -41,12 +41,10 @@ pause_media = true
 [whisper]
 # Model to use for transcription
 # Options: tiny, tiny.en, base, base.en, small, small.en, medium, medium.en, large-v3, large-v3-turbo
-# .en models are English-only but faster and more accurate for English
-# large-v3-turbo is faster than large-v3 with minimal accuracy loss (recommended for modern multi-core CPUs/GPUs)
-model = "large-v3-turbo"
+# On ARM64 Linux (Apple Silicon CPU fallback), base.en delivers instant ~1s turnaround.
+model = "base.en"
 
 # Language for transcription
-# Use "en" for English, "auto" for auto-detection
 language = "en"
 
 # Translate non-English speech to English
@@ -54,6 +52,9 @@ translate = false
 
 # Number of CPU threads for inference (tuned for Apple Silicon M2 Pro 6 P-cores)
 threads = 6
+
+# Optimize context window for short push-to-talk recordings
+context_window_optimization = true
 
 # Initial prompt biases vocabulary, spelling, and proper nouns
 initial_prompt = "Voxtype voice dictation on Arch Linux, Hyprland, and Omarchy. Developer bwrob working in ~/dev on Zenith, debug-dojo, trash-gather, Taplo, and rust-playground. Tools: uv, Ruff, Pyrefly, Zensical, rumdl, complexipy, typos, prek, tach, cosmic-ray, pytest, Cookiecutter. Languages and utilities: Rust, Cargo, Clippy, rustfmt, trpl, TOML, LSP, C++, Python, FZF, eff, ff, bat, yazi, zellij, tmux, starship, helix, micro, XCompose, fcitx5, Wayland, Git, GitHub."
