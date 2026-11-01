@@ -88,10 +88,32 @@ desc    = { fg = "{{ foreground }}" }
 hovered = { bg = "{{ selection }}", fg = "{{ bright_foreground }}" }
 footer  = { fg = "{{ accent }}" }
 
+[icon]
+prepend_conds = [
+	{ if = "dir & hovered", text = "", fg = "{{ accent }}" },
+	{ if = "dir", text = "", fg = "{{ accent }}" },
+]
+prepend_dirs = [
+	{ name = ".config", text = "", fg = "{{ accent }}" },
+	{ name = ".git", text = "", fg = "{{ accent }}" },
+	{ name = ".github", text = "", fg = "{{ accent }}" },
+	{ name = ".npm", text = "", fg = "{{ accent }}" },
+	{ name = "Desktop", text = "", fg = "{{ accent }}" },
+	{ name = "Development", text = "", fg = "{{ accent }}" },
+	{ name = "Documents", text = "", fg = "{{ accent }}" },
+	{ name = "Downloads", text = "", fg = "{{ accent }}" },
+	{ name = "Library", text = "", fg = "{{ accent }}" },
+	{ name = "Movies", text = "", fg = "{{ accent }}" },
+	{ name = "Music", text = "", fg = "{{ accent }}" },
+	{ name = "Pictures", text = "", fg = "{{ accent }}" },
+	{ name = "Public", text = "", fg = "{{ accent }}" },
+	{ name = "Videos", text = "", fg = "{{ accent }}" },
+]
+
 [filetype]
 rules = [
 	# Images
-	{ mime = "image/*", fg = "{{ cyan }}" },
+	{ mime = "image/*", fg = "{{ yellow }}" },
 	# Media
 	{ mime = "video/*", fg = "{{ magenta }}" },
 	{ mime = "audio/*", fg = "{{ yellow }}" },
@@ -108,6 +130,6 @@ rules = [
 	{ mime = "application/json", fg = "{{ yellow }}" },
 	{ mime = "application/x-sh", fg = "{{ green }}" },
 	# Directories & Empty
-	{ mime = "inode/directory", fg = "{{ blue }}", bold = true },
+	{ mime = "inode/directory", fg = "{{ accent }}", bold = true },
 	{ mime = "inode/x-empty", fg = "{{ muted }}" },
 ]
