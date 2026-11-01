@@ -29,6 +29,7 @@ tailscale
 taplo-cli
 tmux
 uv
+voxtype-bin
 watchexec
 yazi
 zellij

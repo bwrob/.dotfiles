@@ -39,6 +39,7 @@ else
         taplo-cli
         tmux
         uv
+        voxtype-bin
         watchexec
         yazi
         zellij
@@ -86,7 +87,7 @@ fi
 if command -v systemctl &>/dev/null; then
     echo "--- Enabling user services & theme timers ---"
     systemctl --user daemon-reload
-    systemctl --user enable --now almond-theme-day.timer almond-theme-night.timer hyprsunset.service
+    systemctl --user enable --now almond-theme-day.timer almond-theme-night.timer hyprsunset.service voxtype.service
 fi
 
 echo "--- Omarchy Setup Complete ---"

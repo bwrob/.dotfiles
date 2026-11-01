@@ -1,0 +1,29 @@
+# Run omarchy-restart-xcompose to apply changes
+
+# Include fast emoji access from Omarchy defaults
+include "/usr/share/omarchy/default/xcompose"
+
+# Identification
+<Multi_key> <space> <n> : "bwrob"
+<Multi_key> <space> <e> : "bw2002@wp.pl"
+
+# Arrows & Math
+<Multi_key> <minus> <greater> : "→"
+<Multi_key> <less> <minus> : "←"
+<Multi_key> <equal> <greater> : "⇒"
+<Multi_key> <exclam> <equal> : "≠"
+<Multi_key> <asciitilde> <equal> : "≈"
+<Multi_key> <greater> <equal> : "≥"
+<Multi_key> <less> <equal> : "≤"
+<Multi_key> <plus> <minus> : "±"
+
+# Typography
+<Multi_key> <space> <space> : "—"
+<Multi_key> <period> <period> : "…"
+<Multi_key> <c> <o> : "©"
+<Multi_key> <t> <m> : "™"
+
+# Kaomoji
+<Multi_key> <s> <h> : "¯\\_(ツ)_/¯"
+<Multi_key> <t> <f> : "(╯°□°)╯︵ ┻━┻"
+<Multi_key> <l> <e> : "( ͡° ͜ʖ ͡°)"
