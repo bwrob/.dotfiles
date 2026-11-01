@@ -1,5 +1,5 @@
 local active_border_color = { colors = { "rgba(f7f5f0ee)", "rgba(7eb8daee)" }, angle = 45 }
-local inactive_border_color = "rgba(2b333dcc)"
+local inactive_border_color = "rgb(19222a)"
 
 hl.config({
   general = {
@@ -14,6 +14,11 @@ hl.config({
       border_active = active_border_color,
       border_inactive = inactive_border_color,
     },
+  },
+
+  decoration = {
+    rounding = 6,
+    rounding_power = 3,
   },
 })
 

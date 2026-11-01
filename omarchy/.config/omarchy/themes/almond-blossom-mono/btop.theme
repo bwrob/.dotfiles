@@ -1,0 +1,87 @@
+# Main background
+theme[main_bg]="#12100e"
+
+# Main text color
+theme[main_fg]="#ffffff"
+
+# Title color for boxes
+theme[title]="#c89b6d"
+
+# Highlight color for keyboard shortcuts
+theme[hi_fg]="#cfa864"
+
+# Background color of selected item in processes box
+theme[selected_bg]="#2c2520"
+
+# Foreground color of selected item in processes box
+theme[selected_fg]="#ffffff"
+
+# Color of inactive/disabled text
+theme[inactive_fg]="#707070"
+
+# Color of text appearing on top of graphs
+theme[graph_text]="#eeeeee"
+
+# Background color of the percentage meters
+theme[meter_bg]="#1a1714"
+
+# Misc colors for processes box
+theme[proc_misc]="#c89b6d"
+
+# Box outline colors
+theme[cpu_box]="#2c2520"
+theme[mem_box]="#2c2520"
+theme[net_box]="#2c2520"
+theme[proc_box]="#2c2520"
+theme[div_line]="#2c2520"
+
+# Temperature graph color (Normal -> Warm -> Hot)
+theme[temp_start]="#93a078"
+theme[temp_mid]="#cfa864"
+theme[temp_end]="#c4685d"
+
+# CPU graph colors
+theme[cpu_start]="#b89a78"
+theme[cpu_mid]="#c89b6d"
+theme[cpu_end]="#c4685d"
+
+# Mem/Disk meters
+theme[free_start]="#b89a78"
+theme[free_mid]="#c89b6d"
+theme[free_end]="#c4685d"
+
+theme[cached_start]="#829b8c"
+theme[cached_mid]="#b89a78"
+theme[cached_end]="#ba8985"
+
+theme[available_start]="#829b8c"
+theme[available_mid]="#b89a78"
+theme[available_end]="#93a078"
+
+theme[used_start]="#b89a78"
+theme[used_mid]="#cfa864"
+theme[used_end]="#c4685d"
+
+# Network graph colors
+theme[download_start]="#829b8c"
+theme[download_mid]="#93a078"
+theme[download_end]="#cfa864"
+
+theme[upload_start]="#ba8985"
+theme[upload_mid]="#c88556"
+theme[upload_end]="#c4685d"
+
+# Process box color gradient
+theme[process_start]="#b89a78"
+theme[process_mid]="#c89b6d"
+theme[process_end]="#c4685d"
+
+# Graph gradient colors
+theme[gradient_color_0]="#12100e"
+theme[gradient_color_1]="#1a1714"
+theme[gradient_color_2]="#2c2520"
+theme[gradient_color_3]="#7e746a"
+theme[gradient_color_4]="#b89a78"
+theme[gradient_color_5]="#c89b6d"
+theme[gradient_color_6]="#cfa864"
+theme[gradient_color_7]="#c4685d"
