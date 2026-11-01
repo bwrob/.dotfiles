@@ -21,6 +21,7 @@ PKGS=(
     just
     lazygit
     micro
+    mise
     starship
     stow
     tmux
@@ -51,6 +52,11 @@ ln -sf "$HOME/.local/state/omarchy/current/theme/starship.toml" "$HOME/.config/s
 ln -sf "$HOME/.local/state/omarchy/current/theme/yazi-theme.toml" "$HOME/.config/yazi/theme.toml"
 mkdir -p "$HOME/.config/zellij/themes"
 ln -sf "$HOME/.local/state/omarchy/current/theme/zellij.kdl" "$HOME/.config/zellij/themes/omarchy.kdl"
+
+if command -v mise &>/dev/null; then
+    echo "--- Installing mise-managed tools (rust, just, taplo) ---"
+    mise install
+fi
 
 if command -v omarchy &>/dev/null; then
     echo "--- Applying Almond Blossom theme & transparency ---"

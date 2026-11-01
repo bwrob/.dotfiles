@@ -1,3 +1,4 @@
 [tools]
 just = "latest"
+rust = "latest"
 taplo = "latest"
