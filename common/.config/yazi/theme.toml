@@ -23,7 +23,6 @@ marker_cut      = { fg = "#E3242B" }
 # Tab
 tab_active   = { fg = "#4E312F", bg = "#FFD966" }
 tab_inactive = { fg = "#FDFDFD", bg = "#1A1A1A" }
-tab_width    = 1
 
 # Count
 count_selected = { fg = "#F1C40F" }
