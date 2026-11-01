@@ -22,25 +22,29 @@ sixel_fraction = 15
 
 [opener]
 edit = [
-	{ run = 'micro "$@"', block = true, desc = "Edit with Micro" },
-	{ run = 'code "$@"', desc = "Edit with VS Code" },
+	{ run = 'micro %s', block = true, desc = "Edit with Micro" },
+	{ run = 'code %s', desc = "Edit with VS Code" },
 ]
 open = [
-	{ run = 'xdg-open "$@"', desc = "Open with system default" },
+	{ run = 'xdg-open %s', desc = "Open with system default" },
 ]
 reveal = [
-	{ run = 'xdg-open "$(dirname "$1")"', desc = "Reveal in file manager" },
+	{ run = 'xdg-open %d1', desc = "Reveal in file manager" },
 ]
 
 [open]
 rules = [
-	{ url = "*/", use = [ "edit", "open", "reveal" ] },
 	{ mime = "text/*", use = [ "edit", "reveal" ] },
+	{ mime = "application/json", use = [ "edit", "reveal" ] },
+	{ mime = "application/x-sh", use = [ "edit", "reveal" ] },
+	{ mime = "application/javascript", use = [ "edit", "reveal" ] },
+	{ mime = "application/xml", use = [ "edit", "reveal" ] },
+	{ mime = "inode/x-empty", use = [ "edit", "reveal" ] },
 	{ mime = "image/*", use = [ "open", "reveal" ] },
 	{ mime = "video/*", use = [ "open", "reveal" ] },
 	{ mime = "audio/*", use = [ "open", "reveal" ] },
 	{ mime = "application/pdf", use = [ "open", "reveal" ] },
-	{ mime = "application/json", use = [ "edit", "reveal" ] },
+	{ url = "*", use = [ "open", "reveal" ] },
 ]
 
 [input]

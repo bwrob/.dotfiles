@@ -11,7 +11,6 @@ linemode = "size"
 show_hidden = true
 show_symlink = true
 
-
 [preview]
 tab_size = 4
 max_width = 1000
@@ -20,34 +19,35 @@ cache_dir = ""
 image_filter = "triangle"
 image_quality = 75
 sixel_fraction = 15
-ueberzug_scale = 1
-ueberzug_offset = [ 0, 0, 0, 0 ]
 
 [opener]
 edit = [
-	{ run = 'micro "$@"', block = true, desc = "Edit with micro" },
-	{ run = 'code "$@"', desc = "Edit with VS Code" },
+	{ run = 'micro %s', block = true, desc = "Edit with Micro" },
+	{ run = 'code %s', desc = "Edit with VS Code" },
 ]
 open = [
-	{ run = 'xdg-open "$@"', desc = "Open with system" },
+	{ run = 'xdg-open %s', desc = "Open with system default" },
 ]
 reveal = [
-	{ run = 'explorer.exe "$(wslpath -w "$1")"', desc = "Reveal in Windows Explorer" },
+	{ run = 'xdg-open %d1', desc = "Reveal in file manager" },
 ]
 
 [open]
 rules = [
-	{ url = "*/", use = [ "edit", "open", "reveal" ] },
 	{ mime = "text/*", use = [ "edit", "reveal" ] },
+	{ mime = "application/json", use = [ "edit", "reveal" ] },
+	{ mime = "application/x-sh", use = [ "edit", "reveal" ] },
+	{ mime = "application/javascript", use = [ "edit", "reveal" ] },
+	{ mime = "application/xml", use = [ "edit", "reveal" ] },
+	{ mime = "inode/x-empty", use = [ "edit", "reveal" ] },
 	{ mime = "image/*", use = [ "open", "reveal" ] },
 	{ mime = "video/*", use = [ "open", "reveal" ] },
 	{ mime = "audio/*", use = [ "open", "reveal" ] },
 	{ mime = "application/pdf", use = [ "open", "reveal" ] },
-	{ mime = "application/json", use = [ "edit", "reveal" ] },
+	{ url = "*", use = [ "open", "reveal" ] },
 ]
 
 [input]
-# Search with zoxide integration
 cd_title  = "Jump to:"
 cd_origin = "top-center"
 cd_offset = [ 0, 2, 50, 3 ]
