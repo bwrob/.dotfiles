@@ -56,7 +56,7 @@ translate = false
 threads = 6
 
 # Initial prompt biases vocabulary, spelling, and proper nouns
-initial_prompt = "Voxtype, Hyprland, Omarchy, Arch Linux, FZF, Wayland, XCompose, CLI, Neovim, Helix, Git, GitHub, dotfiles, Linux, terminal, prompt, bash, zsh, tmux, Python, Rust, C++, API."
+initial_prompt = "Voxtype voice dictation on Arch Linux, Hyprland, and Omarchy. Developer bwrob working in ~/dev on Zenith, debug-dojo, trash-gather, Taplo, and rust-playground. Tools: uv, Ruff, Pyrefly, Zensical, rumdl, complexipy, typos, prek, tach, cosmic-ray, pytest, Cookiecutter. Languages and utilities: Rust, Cargo, Clippy, rustfmt, trpl, TOML, LSP, C++, Python, FZF, eff, ff, bat, yazi, zellij, tmux, starship, helix, micro, XCompose, fcitx5, Wayland, Git, GitHub."
 
 [output]
 # Primary output mode: "type" or "clipboard"
