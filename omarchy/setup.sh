@@ -29,7 +29,9 @@ else
         mise
         obsidian-appimage
         ollama
+        omarchy-steam-fex
         starship
+        steam
         stow
         tailscale
         taplo-cli
