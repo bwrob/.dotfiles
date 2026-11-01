@@ -5,5 +5,7 @@
 ^/README.*
 ^/LICENSE.*
 ^/setup\.sh$
+^/packages\.txt$
+^/update-packages\.sh$
 ^/windows$
 \.DS_Store

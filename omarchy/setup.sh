@@ -4,33 +4,40 @@ set -euo pipefail
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 echo "--- Ensuring required packages are installed ---"
-PKGS=(
-    bat
-    benchmark
-    btop
-    clang
-    eza
-    fastfetch
-    fd
-    fzf
-    git
-    git-lfs
-    github-cli
-    helix
-    imagemagick
-    just
-    lazygit
-    micro
-    mise
-    starship
-    stow
-    tmux
-    uv
-    watchexec
-    yazi
-    zellij
-    zoxide
-)
+PKGS_FILE="$REPO_ROOT/omarchy/packages.txt"
+if [[ -f "$PKGS_FILE" ]]; then
+    mapfile -t PKGS < <(grep -vE '^\s*(#|$)' "$PKGS_FILE")
+else
+    PKGS=(
+        bat
+        benchmark
+        btop
+        clang
+        eza
+        fastfetch
+        fd
+        fzf
+        git
+        git-lfs
+        github-cli
+        helix
+        imagemagick
+        just
+        lazygit
+        micro
+        mise
+        ollama
+        starship
+        stow
+        tailscale
+        tmux
+        uv
+        watchexec
+        yazi
+        zellij
+        zoxide
+    )
+fi
 
 if command -v omarchy &>/dev/null; then
     omarchy pkg add "${PKGS[@]}"
@@ -41,6 +48,11 @@ if command -v omarchy &>/dev/null; then
     omarchy default browser zen || true
 elif command -v pacman &>/dev/null; then
     sudo pacman -S --needed --noconfirm "${PKGS[@]}"
+fi
+
+if command -v tailscale &>/dev/null && command -v systemctl &>/dev/null; then
+    echo "--- Ensuring tailscaled service is enabled ---"
+    sudo systemctl enable --now tailscaled.service 2>/dev/null || true
 fi
 
 echo "--- Stowing common & Omarchy dotfiles ---"

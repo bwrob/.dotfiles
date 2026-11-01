@@ -48,3 +48,14 @@ stow -d ~/.dotfiles -t ~ -v -R common omarchy
 ```
 
 Inside each shell environment, the `dotstow` alias re-stows `common` + the active OS profile automatically.
+
+## Package Management (Omarchy)
+
+On Omarchy / Arch Linux, package declarations live in `omarchy/packages.txt`. To compare locally installed packages against dotfiles and interactively propose additions:
+
+```bash
+dotfiles-update-pkgs          # Interactive prompts for candidate additions
+dotfiles-update-pkgs --diff   # Diff summary only
+dotfiles-update-pkgs --all    # Include base ISO/distro packages
+```
+

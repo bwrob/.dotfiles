@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Wrapper to run dotfiles package updater
+REPO_DIR="$HOME/dev/.dotfiles"
+if [[ ! -d "$REPO_DIR" && -d "$HOME/.dotfiles" ]]; then
+    REPO_DIR="$HOME/.dotfiles"
+fi
+
+if [[ -f "$REPO_DIR/omarchy/update-packages.sh" ]]; then
+    exec "$REPO_DIR/omarchy/update-packages.sh" "$@"
+else
+    echo "Error: Could not find omarchy/update-packages.sh in $REPO_DIR" >&2
+    exit 1
+fi
