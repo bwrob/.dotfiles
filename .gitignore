@@ -1,5 +1,8 @@
 # VSCode
 /.vscode
 
+# Runtime generated theme symlinks
+omarchy/.config/yazi/theme.toml
+
 # Backups
 omarchy.bak/

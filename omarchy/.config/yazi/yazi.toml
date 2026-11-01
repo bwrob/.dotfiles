@@ -11,7 +11,6 @@ linemode = "size"
 show_hidden = true
 show_symlink = true
 
-
 [preview]
 tab_size = 4
 max_width = 1000
@@ -20,19 +19,17 @@ cache_dir = ""
 image_filter = "triangle"
 image_quality = 75
 sixel_fraction = 15
-ueberzug_scale = 1
-ueberzug_offset = [ 0, 0, 0, 0 ]
 
 [opener]
 edit = [
-	{ run = 'micro "$@"', block = true, desc = "Edit with micro" },
+	{ run = 'micro "$@"', block = true, desc = "Edit with Micro" },
 	{ run = 'code "$@"', desc = "Edit with VS Code" },
 ]
 open = [
-	{ run = 'xdg-open "$@"', desc = "Open with system" },
+	{ run = 'xdg-open "$@"', desc = "Open with system default" },
 ]
 reveal = [
-	{ run = 'explorer.exe "$(wslpath -w "$1")"', desc = "Reveal in Windows Explorer" },
+	{ run = 'xdg-open "$(dirname "$1")"', desc = "Reveal in file manager" },
 ]
 
 [open]
@@ -47,7 +44,6 @@ rules = [
 ]
 
 [input]
-# Search with zoxide integration
 cd_title  = "Jump to:"
 cd_origin = "top-center"
 cd_offset = [ 0, 2, 50, 3 ]
