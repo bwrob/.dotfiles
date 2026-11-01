@@ -40,6 +40,8 @@ stow -d "$REPO_ROOT" -t "$HOME" -v -R common omarchy
 ln -sf "$HOME/.local/state/omarchy/current/theme/micro.micro" "$HOME/.config/micro/colorschemes/omarchy.micro"
 ln -sf "$HOME/.local/state/omarchy/current/theme/starship.toml" "$HOME/.config/starship.toml"
 ln -sf "$HOME/.local/state/omarchy/current/theme/yazi-theme.toml" "$HOME/.config/yazi/theme.toml"
+mkdir -p "$HOME/.config/zellij/themes"
+ln -sf "$HOME/.local/state/omarchy/current/theme/zellij.kdl" "$HOME/.config/zellij/themes/omarchy.kdl"
 
 if command -v omarchy &>/dev/null; then
     echo "--- Applying Almond Blossom theme ---"

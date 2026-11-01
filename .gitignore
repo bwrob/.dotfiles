@@ -3,6 +3,7 @@
 
 # Runtime generated theme symlinks
 omarchy/.config/yazi/theme.toml
+omarchy/.config/zellij/themes/omarchy.kdl
 
 # Backups
 omarchy.bak/
