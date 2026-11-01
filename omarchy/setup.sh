@@ -6,7 +6,9 @@ REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 echo "--- Ensuring required packages are installed ---"
 PKGS=(
     bat
+    benchmark
     btop
+    clang
     eza
     fastfetch
     fd
@@ -16,12 +18,14 @@ PKGS=(
     github-cli
     helix
     imagemagick
+    just
     lazygit
     micro
     starship
     stow
     tmux
     uv
+    watchexec
     yazi
     zellij
     zoxide
