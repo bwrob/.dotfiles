@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "bwrob.kbd-backlight",
+  "name": "Keyboard Backlight",
+  "version": "1.0.0",
+  "author": "bwrob",
+  "description": "Toggle and indicate keyboard backlight state",
+  "kinds": ["bar-widget"],
+  "entryPoints": { "barWidget": "BarWidget.qml" },
+  "barWidget": {
+    "displayName": "Keyboard Backlight",
+    "description": "Toggle and indicate keyboard backlight state",
+    "category": "System",
+    "allowMultiple": false,
+    "defaultSection": "right"
+  }
+}

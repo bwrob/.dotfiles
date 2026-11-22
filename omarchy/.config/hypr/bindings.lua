@@ -29,3 +29,4 @@
 o.bind("SUPER + E", "Yazi file manager", { tui = "yazi" })
 o.bind("SUPER + Z", "Zellij", { tui = "zellij" })
 o.bind("SUPER + ALT + T", "Toggle Almond / Mono theme", "omarchy-toggle-almond")
+o.bind("SUPER + ALT + B", "Toggle keyboard backlight", "kbd-backlight-toggle", { locked = true })

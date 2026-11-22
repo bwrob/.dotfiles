@@ -1,0 +1,90 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+no_osd=0
+if [[ ${1:-} == "--no-osd" ]]; then
+  no_osd=1
+  shift
+fi
+
+action="${1:-toggle}"
+
+# Find keyboard backlight device in /sys/class/leds.
+device=""
+for candidate in /sys/class/leds/*kbd_backlight*; do
+  if [[ -e $candidate ]]; then
+    device="$(basename "$candidate")"
+    break
+  fi
+done
+
+if [[ -z $device ]]; then
+  echo "No keyboard backlight device found" >&2
+  exit 1
+fi
+
+state_dir="${XDG_STATE_HOME:-$HOME/.local/state}"
+mkdir -p "$state_dir"
+saved_file="$state_dir/kbd-backlight-level"
+runtime_state="${XDG_RUNTIME_DIR:-/tmp}/kbd-backlight-state"
+
+max_brightness="$(brightnessctl -d "$device" max)"
+current_brightness="$(brightnessctl -d "$device" get)"
+
+write_runtime_state() {
+  local pct="$1"
+  # Write in place so an inotify FileView keeps watching the same inode.
+  printf '%s\n' "$pct" >"$runtime_state"
+}
+
+do_off() {
+  if [[ $current_brightness =~ ^[0-9]+$ ]] && (( current_brightness > 0 )); then
+    printf '%s\n' "$current_brightness" >"$saved_file"
+  fi
+  brightnessctl -d "$device" set 0 >/dev/null
+  write_runtime_state 0
+  (( no_osd )) || omarchy-osd -i keyboard -p 0
+}
+
+do_on() {
+  local target="$max_brightness"
+  if [[ -f $saved_file ]]; then
+    local saved
+    saved="$(<"$saved_file")"
+    if [[ $saved =~ ^[0-9]+$ ]] && (( saved > 0 )); then
+      target="$saved"
+    fi
+  fi
+  (( target < 1 )) && target=1
+  (( target > max_brightness )) && target=$max_brightness
+
+  brightnessctl -d "$device" set "$target" >/dev/null
+  local pct=$(( target * 100 / max_brightness ))
+  write_runtime_state "$pct"
+  (( no_osd )) || omarchy-osd -i keyboard -p "$pct"
+}
+
+case "$action" in
+  off)
+    do_off
+    ;;
+  on)
+    do_on
+    ;;
+  toggle)
+    if [[ $current_brightness =~ ^[0-9]+$ ]] && (( current_brightness > 0 )); then
+      do_off
+    else
+      do_on
+    fi
+    ;;
+  status)
+    pct=$(( current_brightness * 100 / max_brightness ))
+    write_runtime_state "$pct"
+    printf '%s\n' "$pct"
+    ;;
+  *)
+    echo "Usage: $(basename "$0") [--no-osd] [toggle|on|off|status]" >&2
+    exit 2
+    ;;
+esac
