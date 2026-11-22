@@ -1,4 +1,6 @@
 [tools]
 just = "latest"
+rtk = "latest"
 rust = "latest"
 taplo = "latest"
+typst = "latest"

@@ -19,6 +19,7 @@ alias bash.config='micro ~/.bashrc'
 alias .....='cd ../../../..'
 alias tc='textual-code .'
 alias hx='helix'
+alias tree="ls --tree"
 
 # ------------------------------------------------------------------------------
 # 2. Editor & CLI Tooling Defaults
@@ -58,6 +59,7 @@ fi
 # 5. Developer Environments & Completions
 # ------------------------------------------------------------------------------
 [[ -d "$HOME/.cargo/bin" ]] && export PATH="$HOME/.cargo/bin:$PATH"
+[[ -d "$HOME/.elan/bin" ]] && export PATH="$HOME/.elan/bin:$PATH"
 [[ -f "$HOME/.ghcup/env" ]] && source "$HOME/.ghcup/env"
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
@@ -68,10 +70,11 @@ export UV_PROJECT_ENVIRONMENT=".venv-omarchy"
 # ------------------------------------------------------------------------------
 # 6. Interactive Fastfetch Startup
 # ------------------------------------------------------------------------------
-if command -v fastfetch &>/dev/null; then
-  if [[ -f "$HOME/.config/fastfetch/config.jsonc" ]]; then
-    fastfetch -c "$HOME/.config/fastfetch/config.jsonc"
-  else
-    fastfetch
-  fi
-fi
+
+#if command -v fastfetch &>/dev/null; then
+#  if [[ -f "$HOME/.config/fastfetch/config.jsonc" ]]; then
+#    fastfetch -c "$HOME/.config/fastfetch/config.jsonc"
+#  else
+#    fastfetch
+#  fi
+#fi
